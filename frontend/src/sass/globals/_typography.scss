@@ -1,0 +1,17 @@
+@use 'colors' as color;
+$fontWeightLight: 300;
+$fontWeightMedium: 500;
+
+$headingLarge: 2rem;
+$headingMedium: 1.5rem;
+$headingSmall: 1.5rem;
+$headingXs: 1.125rem;
+
+$bodyMedium: 0.9375rem;
+$bodySmall: 0.8125rem;
+
+h1 {
+	color: color.$white;
+	font-size: $headingLarge;
+	font-weight: $fontWeightLight;
+}

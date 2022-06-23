@@ -1,0 +1,18 @@
+@use '../globals/colors' as color;
+
+.btn {
+	width: 100%;
+	border: none;
+	padding: 1rem;
+	border-radius: 10px;
+
+	font-family: inherit;
+	font-weight: lighter;
+
+	&-red {
+		background-color: color.$red;
+		color: color.$white;
+		margin-top: 1rem;
+		font-size: 15px;
+	}
+}

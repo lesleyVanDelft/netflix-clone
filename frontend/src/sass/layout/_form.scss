@@ -1,0 +1,62 @@
+@use '../globals/colors' as color;
+@use '../globals/typography' as typo;
+
+.form {
+	display: flex;
+	flex-direction: column;
+	padding: 1.5rem;
+	padding-bottom: 0;
+	background-color: color.$darkBlue2;
+	border-radius: 10px;
+	width: 100%;
+	justify-content: space-between;
+	h1 {
+		padding-bottom: 2rem;
+	}
+
+	input.input {
+		color: color.$white;
+		background-color: color.$darkBlue2;
+		border: none;
+		border-bottom: 1px solid color.$lightBlue;
+		padding: 1.2rem;
+
+		width: 100%;
+		outline: none;
+		margin-bottom: 1.5rem;
+		font-family: inherit;
+		font-weight: typo.$fontWeightLight;
+		font-size: 15px;
+
+		&::placeholder {
+			font-family: 'Outfit', sans-serif;
+			font-weight: typo.$fontWeightLight;
+			font-size: 15px;
+			color: color.$white;
+			opacity: 0.5;
+		}
+
+		&:focus {
+			border-bottom: 1px solid color.$white;
+		}
+	}
+	input:-webkit-autofill {
+		box-shadow: 0 0 0px 1000px color.$darkBlue2 inset;
+		-webkit-box-shadow: 0 0 0px 1000px color.$darkBlue2 inset;
+	}
+
+	&__account {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 24px 0;
+		color: color.$white;
+		font-weight: typo.$fontWeightLight;
+		a {
+			color: color.$red;
+			font-weight: typo.$fontWeightLight;
+			font-size: 0.9375rem;
+			margin-left: 8px;
+		}
+	}
+}
