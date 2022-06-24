@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAll } from '../../features/mediaSlice/mediaSlice';
+import Recommended from './Recommended/Recommended';
 import Trending from './Trending/Trending';
 
 const Homepage = () => {
@@ -18,10 +19,12 @@ const Homepage = () => {
 	}, [dispatch, loadStatus, media]);
 
 	const trending = mediaList.filter(m => m.isTrending === true);
+	const recommended = mediaList.filter(m => m.isTrending !== true);
 
 	return (
 		<main className="Homepage">
 			<Trending mediaList={mediaList} trending={trending} />
+			<Recommended mediaList={recommended} />
 		</main>
 	);
 };

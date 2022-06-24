@@ -1,5 +1,6 @@
 .Homepage {
 	padding-right: 0;
+	padding-bottom: 2rem;
 	&__trending {
 		font-size: 1rem;
 		padding-right: 0;
@@ -7,5 +8,25 @@
 		h2 {
 			padding-bottom: 1rem;
 		}
+	}
+
+	&__recommended {
+		padding-right: 15px;
+		h2 {
+			padding: 1.5rem 0rem;
+		}
+		.content {
+			// display: grid;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: auto;
+			gap: 15px;
+			list-style: none;
+		}
+		// ul.details {
+
+		// 	figure {
+		// 	}
+		// }
 	}
 }
