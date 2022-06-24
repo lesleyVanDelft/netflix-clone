@@ -10,26 +10,25 @@ const Trending = ({ mediaList, trending }) => {
 	return (
 		<section className="Homepage__trending">
 			<h2 className="sectionHeader">Trending</h2>
-			<ul className="content trending swiper">
-				{/* <Swiper spaceBetween={1}> */}
-				{trending.length > 0 && (
+			{trending.length > 0 && (
+				<ul className="content trending swiper">
 					<Swiper
-						spaceBetween={16}
-						slidesPerView={1.5}
+						// spaceBetween={}
+						slidesPerView={1.55}
+						// slidesPerGroup={2}
+						preloadImages={true}
 						modules={Scrollbar}
 						loop={false}>
 						{trending.map((media, i) => {
-							console.log('test');
 							return (
 								<SwiperSlide key={i}>
-									<MediaItem content={media} />
+									<MediaItem content={media} trending={true} />
 								</SwiperSlide>
 							);
 						})}
 					</Swiper>
-				)}
-				{/* </Swiper> */}
-			</ul>
+				</ul>
+			)}
 		</section>
 	);
 };

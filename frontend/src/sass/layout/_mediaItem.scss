@@ -1,13 +1,101 @@
+@use '../globals/typography' as typo;
 .MediaItem {
 	max-width: 240px;
 	width: 240px;
 	height: fit-content;
 	user-select: none;
 
-	img {
+	button {
+		background-color: rgba(0, 0, 0, 0.5);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		// padding: 1rem;
+		height: 2.25rem;
+		width: 2.25rem;
+		border-radius: 100vw;
+		border: none;
+		position: absolute;
+		top: 8px;
+		right: 24px;
+		z-index: 100;
+
+		svg {
+			transform: scale(1.2);
+		}
+	}
+
+	figure {
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
-		border-radius: 10px;
+		position: relative;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: 10px;
+		}
+
+		figcaption {
+			position: absolute;
+			// width: 80%;
+			bottom: 1.1rem;
+			left: 0.85rem;
+			// font-size: 1rem;
+		}
+	}
+
+	&__details {
+		width: 100%;
+
+		ul.details {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			justify-content: space-between;
+			// background-color: red;
+			// list-style: disc inside;
+			.circle {
+				width: 4px;
+				height: 4px;
+				background-color: white;
+				opacity: 0.8;
+				border-radius: 100%;
+				margin: 0 0.4rem;
+			}
+			li {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 13px;
+				// font-weight: lighter;
+				// font-size: 15px;
+				font-weight: 100;
+				letter-spacing: 0.5px;
+				// list-style: disc outside;
+				&::marker {
+					color: red;
+				}
+				&:nth-child(3) {
+					margin: 0 0rem;
+
+					svg {
+						margin-right: 0.55rem;
+						transform: scale(1.1);
+						path {
+							// fill: orange;
+						}
+					}
+				}
+			}
+		}
+
+		h3 {
+			font-weight: typo.$fontWeightMedium;
+			font-size: 17px;
+			letter-spacing: 0.5px;
+			padding-top: 0.2rem;
+		}
 	}
 }
