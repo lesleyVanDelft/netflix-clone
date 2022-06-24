@@ -14,6 +14,10 @@ h1,
 h2,
 h3 {
 	color: color.$white;
-	font-size: $headingLarge;
+	// font-size: $headingLarge;
 	font-weight: $fontWeightLight;
+}
+
+h2.sectionHeader {
+	font-weight: lighter;
 }

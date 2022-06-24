@@ -1,5 +1,6 @@
 @use '../util/' as util;
 @use './colors' as color;
+@use './typography' as typo;
 
 html {
 	box-sizing: border-box;
@@ -19,6 +20,12 @@ body {
 	font-family: util.$font;
 	background-color: color.$darkBlue1;
 	height: 100%;
+
+	color: color.$white;
+	font-weight: typo.$fontWeightLight;
+}
+ul {
+	list-style: none;
 }
 #root {
 	height: 100%;
@@ -30,4 +37,8 @@ a:visited {
 }
 .App {
 	height: 100%;
+}
+
+main {
+	padding: 0 1rem;
 }

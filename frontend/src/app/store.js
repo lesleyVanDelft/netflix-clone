@@ -1,12 +1,12 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import mediaReducer from '../redux/reducers/mediaReducer';
-const store = configureStore({
+import mediaReducer from '../features/mediaSlice/mediaSlice';
+// import mediaReducer from '../redux/reducers/mediaReducer';
+
+export const store = configureStore({
 	reducer: {
 		media: mediaReducer,
 	},
 });
-
-export default store;
 
 // import { combineReducers, configureStore } from '@reduxjs/toolkit';
 // import { persistReducer } from 'redux-persist';
