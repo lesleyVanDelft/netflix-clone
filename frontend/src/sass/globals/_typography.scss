@@ -10,7 +10,9 @@ $headingXs: 1.125rem;
 $bodyMedium: 0.9375rem;
 $bodySmall: 0.8125rem;
 
-h1 {
+h1,
+h2,
+h3 {
 	color: color.$white;
 	font-size: $headingLarge;
 	font-weight: $fontWeightLight;

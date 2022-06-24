@@ -5,8 +5,7 @@ const colors = require('colors');
 const express = require('express');
 const PORT = process.env.PORT || 5000;
 const connectDB = require('./config/connectDB');
-const Media = require('./Models/MediaModel');
-
+const mediaRoutes = require('./routes/mediaRoutes');
 connectDB();
 
 const app = express();
@@ -16,14 +15,9 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/api/media/all', async (req, res) => {
-	const allMedia = await Media.find({});
-	// console.log(allMedia);
-	res.status(200).json(allMedia);
-});
-// app.get('/test', (req, res) => {
-// 	res.status(200).send('test works');
-// });
+app.use('/api/media', mediaRoutes);
+
+app.get('/api/media/all', async (req, res) => {});
 
 app.listen(PORT, () => {
 	console.log(`Netflixclone is running on port ${PORT}`);
