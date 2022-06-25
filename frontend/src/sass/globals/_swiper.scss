@@ -1,0 +1,23 @@
+@use './colors' as color;
+
+.swiper-pagination {
+	span.swiper-pagination-bullet {
+		background-color: red;
+	}
+}
+.swiper {
+	// padding-bottom: 1rem;
+	&-wrapper {
+		padding-bottom: 0.3rem;
+	}
+	.swiper-scrollbar {
+		background-color: rgba(255, 255, 255, 0.5);
+		position: static;
+		// margin-top: 1rem;
+		&-drag {
+			background-color: color.$red;
+			width: 20%;
+			// height: 3px;
+		}
+	}
+}
