@@ -9,21 +9,56 @@
 	// background-color: red;
 	padding: 0.5rem 0;
 	padding-left: 1rem;
-
-	input.searchInput {
+	position: relative;
+	// &::after {
+	// 	content: '';
+	// 	display: block;
+	// 	width: 0;
+	// 	height: 1px;
+	// 	background-color: color.$white;
+	// 	transition: width 0.3s;
+	// }
+	&__input {
 		width: 80%;
-		background-color: transparent;
-		font-family: inherit;
-		font-size: 1rem;
-		font-weight: typo.$fontWeightLight;
-		border: none;
-		border-bottom: 1px solid transparent;
-		padding: 15px 0;
-		color: color.$white;
+		position: relative;
+		// &::before {
+		// 	content: '';
+		// 	display: block;
+		// 	width: 0;
+		// 	height: 1px;
+		// 	background-color: color.$white;
+		// 	transition: width 0.3s;
+		// }
 
-		&:focus {
-			outline: none;
-			border-color: white;
+		input.searchInput {
+			width: 100%;
+			background-color: transparent;
+			font-family: inherit;
+			font-size: 1rem;
+			font-weight: typo.$fontWeightLight;
+			border: none;
+			border-bottom: 1px solid transparent;
+			padding: 15px 0;
+			color: color.$white;
+			transition: all 0.3s ease-in-out;
+			position: relative;
+
+			&:focus {
+				outline: none;
+			}
+
+			&.active {
+				outline: none;
+			}
 		}
+	}
+
+	svg {
+		position: absolute;
+		right: 30px;
+		top: 50%;
+		transform: translateY(-50%);
+		color: color.$red;
+		font-size: 1.5rem;
 	}
 }

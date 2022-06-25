@@ -8,23 +8,21 @@ import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'swiper/scss/scrollbar';
 
-const Trending = ({ mediaList, trending }) => {
+const Trending = ({ trendingList }) => {
 	return (
 		<section className="Homepage__trending">
 			<h2 className="sectionHeader">Trending</h2>
-			{trending.length > 0 && (
+			{trendingList.length > 0 && (
 				<div className="content trending ">
 					<Swiper
 						spaceBetween={10}
 						modules={[Pagination, Scrollbar, A11y]}
-						// slidesPerView={1.55}
 						slidesPerView={1.55}
 						slidesPerGroup={1}
 						preloadImages={true}
-						// pagination={{ clickable: true, type: 'bullets' }}
 						scrollbar={{ draggable: true }}
 						loop={false}>
-						{trending.map((media, i) => {
+						{trendingList.map((media, i) => {
 							return (
 								<SwiperSlide key={i}>
 									<MediaItem content={media} trending={true} />

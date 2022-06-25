@@ -8,12 +8,14 @@ import Test from './pages/Test';
 import Homepage from './pages/Homepage/Homepage';
 import Navbar from './components/Navbar/Navbar';
 import SearchBar from './components/SearchBar/SearchBar';
+import { useSelector } from 'react-redux';
 
 function App() {
+	// const media = useSelector(state => state.media.media);
 	return (
 		<div className="App">
 			<Navbar />
-			<SearchBar />
+
 			<Routes>
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />

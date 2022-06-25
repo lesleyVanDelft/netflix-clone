@@ -29,4 +29,18 @@
 		// 	}
 		// }
 	}
+
+	.Search {
+		padding-right: 15px;
+		h2 {
+			padding-bottom: 1.5rem;
+		}
+		.content {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: auto;
+			gap: 15px;
+			list-style: none;
+		}
+	}
 }
