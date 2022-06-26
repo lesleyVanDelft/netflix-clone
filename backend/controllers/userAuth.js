@@ -42,7 +42,7 @@ const registerUser = async (req, res) => {
 			{ expiresIn: maxAge }
 		);
 
-		res.cookie('jwt', token);
+		res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
 
 		return res.status(201).json(newUser);
 	}

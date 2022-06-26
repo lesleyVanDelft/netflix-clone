@@ -21,6 +21,12 @@ const Homepage = () => {
 		setSearchValue(value);
 	};
 
+	// useEffect(() => {
+	// 	if(loadStatus === 'loading'){
+
+	// 	}
+	// },[])
+
 	useEffect(() => {
 		if (userStatus === '') {
 			navigate('/login');
@@ -53,7 +59,7 @@ const Homepage = () => {
 
 	return (
 		<>
-			<SearchBar getValue={getValue} />
+			<SearchBar getValue={getValue} placeholder="movies or TV series" />
 			<main className="Homepage">
 				{searchValue === '' ? (
 					<>

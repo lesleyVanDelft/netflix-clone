@@ -1,0 +1,13 @@
+.Movies,
+.TvShows {
+	h2 {
+		padding-bottom: 1.5rem;
+	}
+	.content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: auto;
+		gap: 1rem;
+		list-style: none;
+	}
+}

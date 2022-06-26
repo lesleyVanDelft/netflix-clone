@@ -1,6 +1,15 @@
 import { createSlice, createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 // import { getAllMedia } from '../mediaService/mediaService';
+
+// Gets jwt token from cookie and adds it to request header
+const setConfig = () => {
+	const tokenCookie = Cookies.get('jwt');
+	return {
+		headers: { Authorization: `Bearer ${tokenCookie}` },
+	};
+};
 
 const initialState = {
 	media: [],
@@ -9,7 +18,7 @@ const initialState = {
 };
 
 export const getAll = createAsyncThunk('media/getAll', async () => {
-	const response = await axios.get(`/api/media/all`);
+	const response = await axios.get(`/api/media/all`, setConfig());
 	return response.data;
 });
 

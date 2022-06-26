@@ -1,12 +1,14 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import mediaReducer from '../features/mediaSlice/mediaSlice';
 import userReducer from '../features/userSlice/userSlice';
+import bookmarkReducer from '../features/bookmarkSlice/bookmarkSlice';
 // import mediaReducer from '../redux/reducers/mediaReducer';
 
 export const store = configureStore({
 	reducer: {
 		media: mediaReducer,
 		user: userReducer,
+		bookmarks: bookmarkReducer,
 	},
 });
 

@@ -1,15 +1,23 @@
 import { ReactComponent as MovieIcon } from '../../assets/icon-category-movie.svg';
 import { ReactComponent as BookmarkIconEmpty } from '../../assets/icon-bookmark-empty.svg';
 import { ReactComponent as BookmarkIconFull } from '../../assets/icon-bookmark-full.svg';
+// import { addBookmark } from '../../features/userSlice/userSlice';
+import { useDispatch } from 'react-redux';
+import { addBookmark } from '../../features/bookmarkSlice/bookmarkSlice';
 
 // import logo from '../../'
 
 const MediaItem = ({ content, trending }) => {
+	const dispatch = useDispatch();
 	return (
 		<li className={`MediaItem ${trending ? 'trending' : 'recommended'}`}>
 			{/* {trending && ( */}
 			<button>
-				<BookmarkIconEmpty />
+				<BookmarkIconEmpty
+					onClick={() => {
+						dispatch(addBookmark(content));
+					}}
+				/>
 			</button>
 			{/* // )} */}
 			<figure>

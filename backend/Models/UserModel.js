@@ -19,7 +19,7 @@ const UserSchema = mongoose.Schema({
 	},
 	bookmarkedMedia: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
+			type: Object,
 			ref: 'Media',
 		},
 	],

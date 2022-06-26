@@ -2,11 +2,8 @@ import { useEffect, useState, createContext } from 'react';
 import searchIcon from '../../assets/icon-search.svg';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
-const SearchBar = ({ getValue }) => {
+const SearchBar = ({ getValue, placeholder }) => {
 	const [value, setValue] = useState('');
-	const [active, setActive] = useState(false);
-
-	// console.log(value.length);
 
 	useEffect(() => {
 		getValue(value);
@@ -25,16 +22,10 @@ const SearchBar = ({ getValue }) => {
 					name="search"
 					id="search"
 					className={`searchInput `}
-					placeholder="Search for movies or TV series"
+					placeholder={`Search for ${placeholder}`}
 					autoComplete="off"
 					value={value}
 					onChange={handleChange}
-					// onFocus={() => {
-					// 	setActive(true);
-					// }}
-					// onBlur={() => {
-					// 	setActive(false);
-					// }}
 				/>
 				{value !== '' && <AiFillCloseCircle onClick={() => setValue('')} />}
 			</div>

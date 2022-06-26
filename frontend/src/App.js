@@ -9,19 +9,13 @@ import Homepage from './pages/Homepage/Homepage';
 import Navbar from './components/Navbar/Navbar';
 import SearchBar from './components/SearchBar/SearchBar';
 import { useSelector } from 'react-redux';
-
+import AppRoutes from './AppRoutes';
 function App() {
-	// const media = useSelector(state => state.media.media);
+	const userStatus = useSelector(state => state.user.status);
 	return (
 		<div className="App">
-			<Navbar />
-
-			<Routes>
-				<Route path="/login" element={<Login />} />
-				<Route path="/register" element={<Register />} />
-				<Route exact path="/" element={<Homepage />} />
-				<Route path="/test" element={<Test />} />
-			</Routes>
+			{userStatus === 'loggedIn' && <Navbar />}
+			<AppRoutes />
 		</div>
 	);
 }

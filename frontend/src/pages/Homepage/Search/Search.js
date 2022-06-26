@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import MediaItem from '../../../components/MediaItem/MediaItem';
 
-const Search = ({ searchList, value }) => {
+const Search = ({ searchList, value, bookmarkPage }) => {
 	const [list, setList] = useState(searchList);
 	const [searchValue, setSearchValue] = useState(value);
 
@@ -15,7 +15,7 @@ const Search = ({ searchList, value }) => {
 	return (
 		<section className="Search">
 			<h2 className="sectionHeader">
-				Found {searchList.length} results for '{value}'{' '}
+				Found {searchList.length} results for '{value}'
 			</h2>
 			<ul className="content">
 				{list.map((m, i) => {

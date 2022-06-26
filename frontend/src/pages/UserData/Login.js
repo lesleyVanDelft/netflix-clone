@@ -33,15 +33,7 @@ const Login = () => {
 		// 	),
 		// }),
 		onSubmit: async values => {
-			// return await axios.post(
-			// 	'http://localhost:5000/api/users/register',
-			// 	values
-			// );
-			console.log(values);
 			return dispatch(login(values));
-
-			// console.log(values);
-			// return response.data
 		},
 	});
 	return (
