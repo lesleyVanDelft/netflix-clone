@@ -16,11 +16,15 @@ import { useEffect, useState } from 'react';
 const MediaItem = ({ content, trending }) => {
 	// const user = useSelector(state => state.user.user);
 	const bookmarks = useSelector(state => state.user.user.bookmarkedMedia);
-	const [bookmarkedMedia, setBookmarkedMedia] = useState([bookmarks]);
+	const [bookmarkedMedia, setBookmarkedMedia] = useState(bookmarks);
 	const dispatch = useDispatch();
 	useEffect(() => {
-		setBookmarkedMedia(bookmarks);
-	}, [bookmarks]);
+		bookmarks &&
+			setBookmarkedMedia(
+				bookmarks.filter(bookmark => bookmark._id === content._id)
+			);
+		console.log(bookmarkedMedia);
+	}, [bookmarks, content._id]);
 
 	const handleDispatch = () => {
 		// bookmarkedMedia.map((bookmark, i) => {
@@ -33,12 +37,18 @@ const MediaItem = ({ content, trending }) => {
 		// 		? dispatch(deleteBookmark(content))
 		// 		: dispatch(addBookmark(content));
 		// });
-		console.log(bookmarkedMedia);
+		// console.log(bookmarks && bookmarks.filter(bm => bm._id === content._id));
 		dispatch(addBookmark(content));
 	};
+	// console.log(
+	// 	bookmarkList && bookmarkList.filter(bm => bm._id === content._id)
+	// );
 
 	return (
-		<li className={`MediaItem ${trending ? 'trending' : 'recommended'}`}>
+		<li
+			className={`MediaItem ${trending ? 'trending' : 'recommended'} ${
+				bookmarkedMedia.length > 0 ? 'bookmarked' : ''
+			}`}>
 			{/* {trending && ( */}
 			<button type="button">
 				<BookmarkIconEmpty onClick={handleDispatch} />

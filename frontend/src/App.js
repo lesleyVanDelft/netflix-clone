@@ -10,19 +10,21 @@ import './dist/style.css';
 import { useEffect, useState } from 'react';
 function App() {
 	const userStatus = useSelector(state => state.user.status);
-	const userBookmarks = useSelector(state =>
-		state.user.user ? state.user.user.bookmarkedMedia : null
-	);
-	const [bookmarks, setBookmarks] = useState(userBookmarks);
-	useEffect(() => {
-		setBookmarks(userBookmarks);
-	}, [userBookmarks]);
+	// const userBookmarks = useSelector(state => state.user.bookmarks);
+	// console.log(userBookmarks);
+	// const userBookmarks = useSelector(state =>
+	// 	state.user.user ? state.user.user.bookmarkedMedia : null
+	// );
+	// const [bookmarks, setBookmarks] = useState([]);
+	// useEffect(() => {
+	// 	setBookmarks(userBookmarks);
+	// }, [userBookmarks]);
 
-	console.log(bookmarks);
+	// console.log(bookmarks);
 	return (
 		<div className="App">
 			{userStatus === 'loggedIn' && <Navbar />}
-			<AppRoutes />
+			<AppRoutes b />
 		</div>
 	);
 }

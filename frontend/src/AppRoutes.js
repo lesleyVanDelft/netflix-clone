@@ -8,7 +8,7 @@ import TvShows from './pages/TvShows/TvShows';
 import Login from './pages/UserData/Login';
 import Register from './pages/UserData/Register';
 
-const AppRoutes = () => {
+const AppRoutes = ({}) => {
 	const userStatus = useSelector(state => state.user.status);
 	const location = useLocation();
 	// const cookie = Cookies.get('jwt');

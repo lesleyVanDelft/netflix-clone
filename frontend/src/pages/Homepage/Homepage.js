@@ -20,7 +20,7 @@ const Homepage = () => {
 	const getValue = value => {
 		setSearchValue(value);
 	};
-
+	// console.log(bookmarks);
 	// useEffect(() => {
 	// 	if(loadStatus === 'loading'){
 
