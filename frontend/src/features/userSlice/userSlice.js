@@ -1,6 +1,7 @@
 import { createSlice, createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { useSelector } from 'react-redux';
 
 // Gets jwt token from cookie and adds it to request header
 const setConfig = () => {
@@ -19,17 +20,29 @@ export const login = createAsyncThunk('user/login', async userObject => {
 	return response.data;
 });
 
-// export const addBookmark = createAsyncThunk(
-// 	'user/addBookmark',
-// 	async targetMedia => {
-// 		const response = await axios.post(
-// 			'/api/users/addBookmark',
-// 			targetMedia,
-// 			setConfig()
-// 		);
-// 		return response.data;
-// 	}
-// );
+export const addBookmark = createAsyncThunk(
+	'user/addBookmark',
+	async content => {
+		const response = await axios.post(
+			`/api/bookmarks/add/${content._id}`,
+			content,
+			setConfig()
+		);
+		// console.log(response.data);
+		return response.data;
+	}
+);
+export const deleteBookmark = createAsyncThunk(
+	'user/addBookmark',
+	async content => {
+		const response = await axios.delete(
+			`/api/bookmarks/delete/${content._id}`,
+			setConfig()
+		);
+		// console.log(response.data);
+		return response.data;
+	}
+);
 
 const initialState = {
 	// name: '',
@@ -63,22 +76,26 @@ const userSlice = createSlice({
 			.addCase(login.fulfilled, (state, action) => {
 				state.status = 'loggedIn';
 				state.user = action.payload;
+				state.error = null;
 			})
 			.addCase(login.rejected, (state, action) => {
 				state.status = 'rejected';
 				state.error = action.error.message;
+			})
+			.addCase(addBookmark.pending, (state, action) => {
+				state.status = 'pending';
+			})
+			.addCase(addBookmark.fulfilled, (state, action) => {
+				state.status = 'loggedIn';
+				state.user.bookmarkedMedia = state.user.bookmarkedMedia.concat(
+					action.meta.arg
+				);
+				state.error = null;
+			})
+			.addCase(addBookmark.rejected, (state, action) => {
+				state.status = 'rejected';
+				state.error = action.error.message;
 			});
-		// .addCase(addBookmark.pending, (state, action) => {
-		// 	state.status = 'pending';
-		// })
-		// .addCase(addBookmark.fulfilled, (state, action) => {
-		// 	state.status = 'success';
-		// 	state.bookmarkedMedia = action.payload;
-		// })
-		// .addCase(addBookmark.rejected, (state, action) => {
-		// 	state.status = 'rejected';
-		// 	state.error = action.error.message;
-		// });
 	},
 });
 

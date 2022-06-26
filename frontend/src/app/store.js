@@ -8,7 +8,7 @@ export const store = configureStore({
 	reducer: {
 		media: mediaReducer,
 		user: userReducer,
-		bookmarks: bookmarkReducer,
+		// bookmarks: bookmarkReducer,
 	},
 });
 

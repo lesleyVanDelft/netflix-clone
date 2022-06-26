@@ -2,22 +2,46 @@ import { ReactComponent as MovieIcon } from '../../assets/icon-category-movie.sv
 import { ReactComponent as BookmarkIconEmpty } from '../../assets/icon-bookmark-empty.svg';
 import { ReactComponent as BookmarkIconFull } from '../../assets/icon-bookmark-full.svg';
 // import { addBookmark } from '../../features/userSlice/userSlice';
-import { useDispatch } from 'react-redux';
-import { addBookmark } from '../../features/bookmarkSlice/bookmarkSlice';
+import { useDispatch, useSelector } from 'react-redux';
+// import { addBookmark } from '../../features/bookmarkSlice/bookmarkSlice';
+import {
+	addBookmark,
+	deleteBookmark,
+} from '../../features/userSlice/userSlice';
+// import { addBookmark } from '../../features/bookmarkSlice/bookmarkSlice';
+import { useEffect, useState } from 'react';
 
 // import logo from '../../'
 
 const MediaItem = ({ content, trending }) => {
+	// const user = useSelector(state => state.user.user);
+	const bookmarks = useSelector(state => state.user.user.bookmarkedMedia);
+	const [bookmarkedMedia, setBookmarkedMedia] = useState([bookmarks]);
 	const dispatch = useDispatch();
+	useEffect(() => {
+		setBookmarkedMedia(bookmarks);
+	}, [bookmarks]);
+
+	const handleDispatch = () => {
+		// bookmarkedMedia.map((bookmark, i) => {
+		// 	// return console.log(bookmark._id);
+		// 	// if(content._id === bookmark._id){
+		// 	// 	return dispatch()
+		// 	console.log(content._id === bookmark._id);
+		// 	// }
+		// 	return content._id === bookmark._id
+		// 		? dispatch(deleteBookmark(content))
+		// 		: dispatch(addBookmark(content));
+		// });
+		console.log(bookmarkedMedia);
+		dispatch(addBookmark(content));
+	};
+
 	return (
 		<li className={`MediaItem ${trending ? 'trending' : 'recommended'}`}>
 			{/* {trending && ( */}
-			<button>
-				<BookmarkIconEmpty
-					onClick={() => {
-						dispatch(addBookmark(content));
-					}}
-				/>
+			<button type="button">
+				<BookmarkIconEmpty onClick={handleDispatch} />
 			</button>
 			{/* // )} */}
 			<figure>

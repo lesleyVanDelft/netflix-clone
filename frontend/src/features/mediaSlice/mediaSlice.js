@@ -35,6 +35,7 @@ const mediaSlice = createSlice({
 				state.status = 'success';
 				// state.media = state.media.concat(action.payload);
 				state.media = action.payload;
+				// state.error = null;
 			})
 			.addCase(getAll.rejected, (state, action) => {
 				state.status = 'failed';

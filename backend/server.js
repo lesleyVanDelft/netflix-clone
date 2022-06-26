@@ -4,11 +4,12 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const colors = require('colors');
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 5000;
 const connectDB = require('./config/connectDB');
 const authRoutes = require('./routes/authRoutes');
 const mediaRoutes = require('./routes/mediaRoutes');
-const cookieParser = require('cookie-parser');
+const bookmarkRoutes = require('./routes/bookmarkRoutes');
 
 // Connect to MongoDB and initialize express app
 connectDB();
@@ -24,7 +25,7 @@ app.use(cookieParser());
 // Routes
 app.use('/api/users', authRoutes);
 app.use('/api/media', mediaRoutes);
-
+app.use('/api/bookmarks', bookmarkRoutes);
 // app.get('/api/media/all', async (req, res) => {});
 
 // Serve frontend
