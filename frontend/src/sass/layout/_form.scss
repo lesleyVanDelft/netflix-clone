@@ -8,8 +8,17 @@
 	padding-bottom: 0;
 	background-color: color.$darkBlue2;
 	border-radius: 10px;
-	width: 100%;
+	width: min(100%, 25rem);
+	margin-inline: auto;
 	justify-content: space-between;
+
+	@media (hover: hover) {
+		button:hover {
+			cursor: pointer;
+			filter: brightness(125%);
+		}
+	}
+
 	h1 {
 		padding-bottom: 1.5rem;
 	}
@@ -20,7 +29,6 @@
 		border: none;
 		border-bottom: 1px solid color.$lightBlue;
 		padding: 1.2rem;
-
 		width: 100%;
 		outline: none;
 		margin-bottom: 1.5rem;
@@ -35,7 +43,6 @@
 			color: color.$white;
 			opacity: 0.5;
 		}
-
 		&:focus {
 			border-bottom: 1px solid color.$white;
 		}
@@ -43,6 +50,7 @@
 	input:-webkit-autofill {
 		box-shadow: 0 0 0px 1000px color.$darkBlue2 inset;
 		-webkit-box-shadow: 0 0 0px 1000px color.$darkBlue2 inset;
+		-webkit-text-fill-color: color.$white;
 	}
 
 	&__account {

@@ -9,6 +9,7 @@ import Trending from './Trending/Trending';
 
 const Homepage = () => {
 	const loadStatus = useSelector(state => state.media.status);
+	const userStorage = JSON.parse(localStorage.getItem('user'));
 	const userStatus = useSelector(state => state.user.status);
 	const media = useSelector(state => state.media.media);
 	const [mediaList, setMediaList] = useState(media);
@@ -28,10 +29,10 @@ const Homepage = () => {
 	// },[])
 
 	useEffect(() => {
-		if (userStatus === '') {
+		if (userStorage === null) {
 			navigate('/login');
 		}
-	}, [navigate, userStatus]);
+	}, [navigate, userStatus, userStorage]);
 
 	useEffect(() => {
 		if (loadStatus === 'idle' && userStatus === 'loggedIn') {

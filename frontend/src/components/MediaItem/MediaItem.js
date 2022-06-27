@@ -23,7 +23,7 @@ const MediaItem = ({ content, trending }) => {
 			setBookmarkedMedia(
 				bookmarks.filter(bookmark => bookmark._id === content._id)
 			);
-		console.log(bookmarkedMedia);
+		// console.log(bookmarkedMedia);
 	}, [bookmarks, content._id]);
 
 	const handleDispatch = () => {

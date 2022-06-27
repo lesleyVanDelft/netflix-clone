@@ -4,15 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import { login } from '../../features/userSlice/userSlice';
+import { saveLocalStorage } from '../../features/utils/saveLocalStorage';
 
 const Login = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const userStatus = useSelector(state => state.user.status);
+	const user = useSelector(state => state.user);
+	// const userStatus = useSelector(state => state.user.status);
 
 	useEffect(() => {
-		userStatus === 'loggedIn' && navigate('/');
-	}, [userStatus]);
+		user.status === 'loggedIn' && navigate('/');
+		user.status === 'loggedIn' && saveLocalStorage(user);
+	}, [user.status]);
 	// Register form
 	const formik = useFormik({
 		initialValues: {
@@ -33,7 +36,7 @@ const Login = () => {
 		// 	),
 		// }),
 		onSubmit: async values => {
-			return dispatch(login(values));
+			dispatch(login(values));
 		},
 	});
 	return (

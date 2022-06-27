@@ -28,7 +28,8 @@ app.use('/api/media', mediaRoutes);
 app.use('/api/bookmarks', bookmarkRoutes);
 
 app.get('/login', (req, res) => {
-	res.redirect('http://localhost:3000/login');
+	// res.redirect('http://localhost:3000/login');
+	res.status(200).send('login page');
 });
 
 // Serve frontend
