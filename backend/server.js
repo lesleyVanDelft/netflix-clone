@@ -26,7 +26,10 @@ app.use(cookieParser());
 app.use('/api/users', authRoutes);
 app.use('/api/media', mediaRoutes);
 app.use('/api/bookmarks', bookmarkRoutes);
-// app.get('/api/media/all', async (req, res) => {});
+
+app.get('/login', (req, res) => {
+	res.redirect('http://localhost:3000/login');
+});
 
 // Serve frontend
 if (process.env.NODE_ENV === 'production') {
