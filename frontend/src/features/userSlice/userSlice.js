@@ -107,6 +107,10 @@ const userSlice = createSlice({
 			.addCase(addBookmark.fulfilled, (state, action) => {
 				state.status = 'loggedIn';
 				action.payload = action.meta.arg;
+
+				state.user.bookmarkedMedia = state.user.bookmarkedMedia.concat(
+					action.payload._id
+				);
 			})
 			.addCase(addBookmark.rejected, (state, action) => {
 				state.status = 'rejected';

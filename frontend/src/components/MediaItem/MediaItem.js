@@ -28,6 +28,10 @@ const MediaItem = ({ content, trending }) => {
 		setCurrentMedia(content);
 	}, [content]);
 
+	useEffect(() => {
+		setBookmark(isBookmarked);
+	}, [isBookmarked]);
+
 	// useEffect(() => {
 	// 	setBookmark(isBookmarked);
 	// }, [isBookmarked]);
@@ -64,17 +68,18 @@ const MediaItem = ({ content, trending }) => {
 				// console.log(currentMedia._id);
 				// console.log(bookmark);
 				// null
-				console.log(bookmark);
+				// console.log(bookmark);
 			}}>
 			<button
 				type="button"
 				onClick={() => {
 					if (bookmark) {
 						dispatch(deleteBookmark(content));
+						setBookmark(false);
 					} else if (!bookmark) {
 						dispatch(addBookmark(content));
+						setBookmark(true);
 					}
-					setBookmark(!bookmark);
 				}}
 				className={`MediaItem__bookmark ${bookmark ? 'bookmarked' : ''}`}>
 				<BookmarkIconEmpty />
