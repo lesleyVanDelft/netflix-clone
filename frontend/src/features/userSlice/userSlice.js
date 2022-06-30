@@ -57,14 +57,16 @@ const initialState = {
 	// email: '',
 	// password: '',
 	// bookmarkedMedia: [],
-	status: '',
+	status: 'loggedOut',
 	error: null,
 };
 
 const userSlice = createSlice({
 	name: 'user',
 	initialState,
-	reducers: {},
+	reducers: {
+		logout: state => initialState,
+	},
 	extraReducers: builder => {
 		builder
 			.addCase(register.pending, (state, action) => {
@@ -95,7 +97,10 @@ const userSlice = createSlice({
 				state.status = 'pending';
 			})
 			.addCase(logout.fulfilled, (state, action) => {
-				state = initialState;
+				state.status = 'loggedOut';
+				// state.actions.reset();
+				state.user = null;
+				// state = initialState;
 			})
 			.addCase(logout.rejected, (state, action) => {
 				state.status = 'rejected';
@@ -138,11 +143,11 @@ const userSlice = createSlice({
 	},
 });
 
-// const toggleBookmark = createAsyncThunk()
-const toggleBookmark = bookmark => {
-	return dispatch => {
-		dispatch(addBookmark(bookmark));
-	};
-};
-
+// // const toggleBookmark = createAsyncThunk()
+// const toggleBookmark = bookmark => {
+// 	return dispatch => {
+// 		dispatch(addBookmark(bookmark));
+// 	};
+// };
+export const { reset } = userSlice.actions;
 export default userSlice.reducer;
