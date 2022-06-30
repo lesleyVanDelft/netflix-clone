@@ -9,7 +9,9 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import Dropdown from '../Dropdown/Dropdown';
 import DropdownItem from '../Dropdown/DropdownItem/DropdownItem';
+import { logout } from '../../features/userSlice/userSlice';
 import { logoutLocalStorage } from '../../features/utils/saveLocalStorage';
+import { useDispatch } from 'react-redux';
 
 const Navbar = () => {
 	const [active, setActive] = useState(false);
@@ -21,6 +23,7 @@ const Navbar = () => {
 	// console.log(userProfileRef.current);
 
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	return (
 		<nav className="Navbar">
 			<figure className="Navbar__logo" onClick={() => navigate('/')}>
@@ -62,9 +65,9 @@ const Navbar = () => {
 							<button
 								className="btn btn--dropdown"
 								onClick={() => {
-									logoutLocalStorage();
 									setTimeout(() => {
 										navigate('/login');
+										dispatch(logout());
 									}, 100);
 								}}>
 								Logout

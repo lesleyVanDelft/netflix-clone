@@ -2,6 +2,7 @@ import { createSlice, createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useSelector } from 'react-redux';
+import { logoutLocalStorage } from '../utils/saveLocalStorage';
 
 // Gets jwt token from cookie and adds it to request header
 const setConfig = () => {
@@ -18,6 +19,10 @@ export const register = createAsyncThunk('user/register', async userObject => {
 export const login = createAsyncThunk('user/login', async userObject => {
 	const response = await axios.post('/api/users/login', userObject);
 	return response.data;
+});
+
+export const logout = createAsyncThunk('user/logout', () => {
+	return logoutLocalStorage();
 });
 
 export const addBookmark = createAsyncThunk(
@@ -86,29 +91,22 @@ const userSlice = createSlice({
 				state.status = 'rejected';
 				state.error = action.error.message;
 			})
+			.addCase(logout.pending, (state, action) => {
+				state.status = 'pending';
+			})
+			.addCase(logout.fulfilled, (state, action) => {
+				state = initialState;
+			})
+			.addCase(logout.rejected, (state, action) => {
+				state.status = 'rejected';
+				state.error = 'something went wrong with logging out? :)';
+			})
 			.addCase(addBookmark.pending, (state, action) => {
 				state.status = 'pending';
 			})
 			.addCase(addBookmark.fulfilled, (state, action) => {
 				state.status = 'loggedIn';
 				action.payload = action.meta.arg;
-
-				state.user.bookmarkedMedia = state.user.bookmarkedMedia.concat(
-					action.payload._id
-				);
-
-				// state.user.bookmarkedMedia = state.user.bookmarkedMedia.filter(bm => bm._id !== action.payload._id)
-				// state.user.bookmarkedMedia.map(bm => console.log(bm));
-				// if (state.user.bookmarkedMedia.includes(action.payload._id)) {
-				// 	state.user.bookmarkedMedia = state.user.bookmarkedMedia.filter(
-				// 		bm => bm._id !== action.payload._id
-				// 	);
-				// } else {
-				// 	state.user.bookmarkedMedia = state.user.bookmarkedMedia.concat(
-				// 		action.payload._id
-				// 	);
-				// }
-				// console.log(state.user.bookmarkedMedia);
 			})
 			.addCase(addBookmark.rejected, (state, action) => {
 				state.status = 'rejected';
@@ -125,6 +123,8 @@ const userSlice = createSlice({
 				state.user.bookmarkedMedia = state.user.bookmarkedMedia.filter(
 					bookmark => bookmark !== action.payload._id
 				);
+				// state.user.bookmarkedMedia = state.user.bookmarkedMedia.map(bookmark => bookmark)
+				// .filter(bm => bm.toString() !== action.payload._id.toString())
 				state.error = null;
 			})
 			.addCase(deleteBookmark.rejected, (state, action) => {

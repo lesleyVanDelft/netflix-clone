@@ -64,6 +64,7 @@ const MediaItem = ({ content, trending }) => {
 				// console.log(currentMedia._id);
 				// console.log(bookmark);
 				// null
+				console.log(bookmark);
 			}}>
 			<button
 				type="button"
