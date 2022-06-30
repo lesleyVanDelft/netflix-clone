@@ -25,18 +25,21 @@ export const addBookmark = createAsyncThunk(
 	async content => {
 		const response = await axios.post(
 			`/api/bookmarks/add/${content._id}`,
-			content,
+			null,
 			setConfig()
 		);
 		// console.log(response.data);
 		return response.data;
 	}
 );
+
+// maybe mediaitem dispatch on bookmarkedmedia filter
 export const deleteBookmark = createAsyncThunk(
-	'user/addBookmark',
+	'user/deleteBookmark',
 	async content => {
-		const response = await axios.delete(
-			`/api/bookmarks/delete/${content._id}`,
+		const response = await axios.post(
+			`/api/bookmarks/add/${content._id}`,
+			null,
 			setConfig()
 		);
 		// console.log(response.data);
@@ -76,6 +79,7 @@ const userSlice = createSlice({
 			.addCase(login.fulfilled, (state, action) => {
 				state.status = 'loggedIn';
 				state.user = action.payload;
+				// state.user.bookmarkedMedia = [...state.user.bookmarkedMedia];
 				state.error = null;
 			})
 			.addCase(login.rejected, (state, action) => {
@@ -87,16 +91,54 @@ const userSlice = createSlice({
 			})
 			.addCase(addBookmark.fulfilled, (state, action) => {
 				state.status = 'loggedIn';
+				action.payload = action.meta.arg;
+
 				state.user.bookmarkedMedia = state.user.bookmarkedMedia.concat(
-					action.meta.arg
+					action.payload._id
+				);
+
+				// state.user.bookmarkedMedia = state.user.bookmarkedMedia.filter(bm => bm._id !== action.payload._id)
+				// state.user.bookmarkedMedia.map(bm => console.log(bm));
+				// if (state.user.bookmarkedMedia.includes(action.payload._id)) {
+				// 	state.user.bookmarkedMedia = state.user.bookmarkedMedia.filter(
+				// 		bm => bm._id !== action.payload._id
+				// 	);
+				// } else {
+				// 	state.user.bookmarkedMedia = state.user.bookmarkedMedia.concat(
+				// 		action.payload._id
+				// 	);
+				// }
+				// console.log(state.user.bookmarkedMedia);
+			})
+			.addCase(addBookmark.rejected, (state, action) => {
+				state.status = 'rejected';
+				state.error = action.error.message;
+			})
+			.addCase(deleteBookmark.pending, (state, action) => {
+				state.status = 'pending';
+			})
+			.addCase(deleteBookmark.fulfilled, (state, action) => {
+				state.status = 'loggedIn';
+				action.payload = action.meta.arg;
+				console.log(action.payload._id);
+
+				state.user.bookmarkedMedia = state.user.bookmarkedMedia.filter(
+					bookmark => bookmark !== action.payload._id
 				);
 				state.error = null;
 			})
-			.addCase(addBookmark.rejected, (state, action) => {
+			.addCase(deleteBookmark.rejected, (state, action) => {
 				state.status = 'rejected';
 				state.error = action.error.message;
 			});
 	},
 });
+
+// const toggleBookmark = createAsyncThunk()
+const toggleBookmark = bookmark => {
+	return dispatch => {
+		dispatch(addBookmark(bookmark));
+	};
+};
 
 export default userSlice.reducer;

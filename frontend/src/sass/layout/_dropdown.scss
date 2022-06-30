@@ -1,0 +1,34 @@
+.Dropdown {
+	position: absolute;
+	right: -0.5rem;
+	top: 3rem;
+	background-color: white;
+	z-index: 50;
+	width: min(10rem, 10rem);
+	// width: min(fit-content + 4rem, 8rem);
+	border-radius: 2px;
+	// padding: 0 2rem
+
+	svg {
+		color: inherit;
+		font-size: 2rem;
+		position: absolute;
+		right: 0.5rem;
+		top: -1.2rem;
+	}
+
+	&__item {
+		color: black;
+		padding: 1rem 0.5rem;
+		padding-left: 1rem;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+
+		&:first-of-type {
+			position: relative;
+		}
+		&:last-of-type {
+			border-bottom: none;
+			text-align: center;
+		}
+	}
+}

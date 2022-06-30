@@ -17,10 +17,12 @@ const UserSchema = mongoose.Schema({
 		required: true,
 		minlength: [6, 'Password must be at least 6 characters'],
 	},
-	bookmarkedMedia: {
-		type: Array,
-		// ref: 'Media',
-	},
+	bookmarkedMedia: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Media',
+		},
+	],
 });
 
 module.exports = mongoose.model('User', UserSchema);

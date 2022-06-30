@@ -8,19 +8,19 @@
 	user-select: none;
 	position: relative;
 
-	&.bookmarked {
-		button {
-			background-color: color.$red;
-			opacity: 0.8;
-			// opacity: 0.5;
-			svg {
-				path {
-					fill: color.$white;
-					fill-opacity: 1;
-				}
+	// &.bookmarked {
+	button.bookmarked {
+		background-color: color.$red;
+		opacity: 0.8;
+		// opacity: 0.5;
+		svg {
+			path {
+				fill: color.$white;
+				fill-opacity: 1;
 			}
 		}
 	}
+	// }
 
 	button {
 		background-color: rgba(0, 0, 0, 0.5);

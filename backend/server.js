@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
 const colors = require('colors');
+const morgan = require('morgan');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 5000;
@@ -21,6 +22,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(morgan('tiny'));
 
 // Routes
 app.use('/api/users', authRoutes);

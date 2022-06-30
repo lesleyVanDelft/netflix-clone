@@ -24,9 +24,9 @@ body {
 	color: color.$white;
 	font-weight: typo.$fontWeightLight;
 }
-// ul {
-// 	list-style: none;
-// }
+ul {
+	list-style: none;
+}
 #root {
 	height: 100%;
 }
@@ -41,4 +41,15 @@ a:visited {
 
 main {
 	padding: 0 1rem;
+}
+
+.flex-row-container {
+	display: flex;
+	// align-content: center;
+	align-items: center;
+	justify-content: center;
+}
+
+.bold {
+	font-weight: bolder;
 }

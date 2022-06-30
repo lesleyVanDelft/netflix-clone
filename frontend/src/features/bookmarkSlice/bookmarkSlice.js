@@ -16,7 +16,7 @@ export const addBookmark = createAsyncThunk(
 	async targetMedia => {
 		const response = await axios.post(
 			`/api/bookmarks/add/${targetMedia._id}`,
-			targetMedia,
+			null,
 			setConfig()
 		);
 		return response.data;

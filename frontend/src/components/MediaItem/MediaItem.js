@@ -1,9 +1,7 @@
 import { ReactComponent as MovieIcon } from '../../assets/icon-category-movie.svg';
 import { ReactComponent as BookmarkIconEmpty } from '../../assets/icon-bookmark-empty.svg';
 import { ReactComponent as BookmarkIconFull } from '../../assets/icon-bookmark-full.svg';
-// import { addBookmark } from '../../features/userSlice/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-// import { addBookmark } from '../../features/bookmarkSlice/bookmarkSlice';
 import {
 	addBookmark,
 	deleteBookmark,
@@ -14,46 +12,75 @@ import { useEffect, useState } from 'react';
 // import logo from '../../'
 
 const MediaItem = ({ content, trending }) => {
-	// const user = useSelector(state => state.user.user);
-	const bookmarks = useSelector(state => state.user.user.bookmarkedMedia);
-	const [bookmarkedMedia, setBookmarkedMedia] = useState(bookmarks);
+	const user = useSelector(state => state.user);
+	const [currentMedia, setCurrentMedia] = useState(content);
+	const isBookmarked =
+		user && user.user.bookmarkedMedia.includes(currentMedia._id);
+	const [bookmark, setBookmark] = useState(isBookmarked);
+
+	// const bookmarks = useSelector(state => state.user.bookmarkedMedia);
+	// const [bookmarkedMedia, setBookmarkedMedia] = useState([
+	// 	...user.user.bookmarkedMedia,
+	// ]);
+
 	const dispatch = useDispatch();
 	useEffect(() => {
-		bookmarks &&
-			setBookmarkedMedia(
-				bookmarks.filter(bookmark => bookmark._id === content._id)
-			);
-		// console.log(bookmarkedMedia);
-	}, [bookmarks, content._id]);
+		setCurrentMedia(content);
+	}, [content]);
 
-	const handleDispatch = () => {
-		// bookmarkedMedia.map((bookmark, i) => {
-		// 	// return console.log(bookmark._id);
-		// 	// if(content._id === bookmark._id){
-		// 	// 	return dispatch()
-		// 	console.log(content._id === bookmark._id);
-		// 	// }
-		// 	return content._id === bookmark._id
-		// 		? dispatch(deleteBookmark(content))
-		// 		: dispatch(addBookmark(content));
-		// });
-		// console.log(bookmarks && bookmarks.filter(bm => bm._id === content._id));
+	// useEffect(() => {
+	// 	setBookmark(isBookmarked);
+	// }, [isBookmarked]);
+
+	// useEffect(() => {
+	// 	setBookmarkedMedia(
+	// 		user.user.bookmarkedMedia.filter(bookmark => bookmark._id === content._id)
+	// 	);
+	// }, [
+	// 	content._id,
+	// 	user.bookmarkedMedia,
+	// 	user.bookmarks,
+	// 	user.user.bookmarkedMedia,
+	// ]);
+	// console.log(bookmarkedMedia);
+
+	const handleBookmark = () => {
+		// if (isBookmarked.length > 0) {
+		// dispatch(deleteBookmark(content));
+		// } else {
+
+		// user.user.bookmarkedMedia[0] !== currentMedia._id
+		// 	? dispatch(addBookmark(content))
+		// 	: dispatch(deleteBookmark(content));
 		dispatch(addBookmark(content));
+		// }
 	};
-	// console.log(
-	// 	bookmarkList && bookmarkList.filter(bm => bm._id === content._id)
-	// );
 
 	return (
 		<li
-			className={`MediaItem ${trending ? 'trending' : 'recommended'} ${
-				bookmarkedMedia.length > 0 ? 'bookmarked' : ''
-			}`}>
-			{/* {trending && ( */}
-			<button type="button">
-				<BookmarkIconEmpty onClick={handleDispatch} />
+			className={`MediaItem ${trending ? 'trending' : 'recommended'} `}
+			onClick={() => {
+				// console.log(user.user.bookmarkedMedia[0]);
+				// console.log(currentMedia._id);
+				// console.log(bookmark);
+				// null
+			}}>
+			<button
+				type="button"
+				onClick={() => {
+					if (bookmark) {
+						dispatch(deleteBookmark(content));
+					} else if (!bookmark) {
+						dispatch(addBookmark(content));
+					}
+					setBookmark(!bookmark);
+				}}
+				className={`MediaItem__bookmark ${bookmark ? 'bookmarked' : ''}`}>
+				<BookmarkIconEmpty />
+				{/* {bookmark ? <BookmarkIconFull /> : <BookmarkIconEmpty />} */}
+				{/* {bookmark || <BookmarkIconEmpty />} */}
 			</button>
-			{/* // )} */}
+
 			<figure>
 				<img
 					src={

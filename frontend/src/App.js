@@ -10,6 +10,7 @@ import './dist/style.css';
 import { useEffect, useState } from 'react';
 function App() {
 	const userStatus = useSelector(state => state.user.status);
+	const user = JSON.parse(localStorage.getItem('user'));
 	// const userBookmarks = useSelector(state => state.user.bookmarks);
 	// console.log(userBookmarks);
 	// const userBookmarks = useSelector(state =>
@@ -23,7 +24,7 @@ function App() {
 	// console.log(bookmarks);
 	return (
 		<div className="App">
-			{userStatus === 'loggedIn' && <Navbar />}
+			{user !== null && <Navbar />}
 			<AppRoutes b />
 		</div>
 	);
