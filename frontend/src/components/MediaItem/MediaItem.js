@@ -6,22 +6,15 @@ import {
 	addBookmark,
 	deleteBookmark,
 } from '../../features/userSlice/userSlice';
-// import { addBookmark } from '../../features/bookmarkSlice/bookmarkSlice';
 import { useEffect, useState } from 'react';
-
-// import logo from '../../'
+import Skeleton from 'react-loading-skeleton';
 
 const MediaItem = ({ content, trending }) => {
 	const user = useSelector(state => state.user);
 	const [currentMedia, setCurrentMedia] = useState(content);
 	const isBookmarked =
-		user && user.user.bookmarkedMedia.includes(currentMedia._id);
+		user && user.user && user.user.bookmarkedMedia.includes(currentMedia._id);
 	const [bookmark, setBookmark] = useState(isBookmarked);
-
-	// const bookmarks = useSelector(state => state.user.bookmarkedMedia);
-	// const [bookmarkedMedia, setBookmarkedMedia] = useState([
-	// 	...user.user.bookmarkedMedia,
-	// ]);
 
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -32,44 +25,20 @@ const MediaItem = ({ content, trending }) => {
 		setBookmark(isBookmarked);
 	}, [isBookmarked]);
 
-	// useEffect(() => {
-	// 	setBookmark(isBookmarked);
-	// }, [isBookmarked]);
+	// const handleBookmark = () => {
+	// 	// if (isBookmarked.length > 0) {
+	// 	// dispatch(deleteBookmark(content));
+	// 	// } else {
 
-	// useEffect(() => {
-	// 	setBookmarkedMedia(
-	// 		user.user.bookmarkedMedia.filter(bookmark => bookmark._id === content._id)
-	// 	);
-	// }, [
-	// 	content._id,
-	// 	user.bookmarkedMedia,
-	// 	user.bookmarks,
-	// 	user.user.bookmarkedMedia,
-	// ]);
-	// console.log(bookmarkedMedia);
-
-	const handleBookmark = () => {
-		// if (isBookmarked.length > 0) {
-		// dispatch(deleteBookmark(content));
-		// } else {
-
-		// user.user.bookmarkedMedia[0] !== currentMedia._id
-		// 	? dispatch(addBookmark(content))
-		// 	: dispatch(deleteBookmark(content));
-		dispatch(addBookmark(content));
-		// }
-	};
+	// 	// user.user.bookmarkedMedia[0] !== currentMedia._id
+	// 	// 	? dispatch(addBookmark(content))
+	// 	// 	: dispatch(deleteBookmark(content));
+	// 	dispatch(addBookmark(content));
+	// 	// }
+	// };
 
 	return (
-		<li
-			className={`MediaItem ${trending ? 'trending' : 'recommended'} `}
-			onClick={() => {
-				// console.log(user.user.bookmarkedMedia[0]);
-				// console.log(currentMedia._id);
-				// console.log(bookmark);
-				// null
-				// console.log(bookmark);
-			}}>
+		<li className={`MediaItem ${trending ? 'trending' : 'recommended'} `}>
 			<button
 				type="button"
 				onClick={() => {
@@ -83,8 +52,6 @@ const MediaItem = ({ content, trending }) => {
 				}}
 				className={`MediaItem__bookmark ${bookmark ? 'bookmarked' : ''}`}>
 				<BookmarkIconEmpty />
-				{/* {bookmark ? <BookmarkIconFull /> : <BookmarkIconEmpty />} */}
-				{/* {bookmark || <BookmarkIconEmpty />} */}
 			</button>
 
 			<figure>
@@ -100,14 +67,14 @@ const MediaItem = ({ content, trending }) => {
 					{trending && (
 						<div className="MediaItem__details trending">
 							<ul className="details">
-								<li>{content.year}</li>
+								<li>{content.year || <Skeleton />}</li>
 								<span className="circle"></span>
 								<li>
 									<MovieIcon />
-									{content.category}
+									{content.category || <Skeleton />}
 								</li>
 								<span className="circle"></span>
-								<li>{content.rating}</li>
+								<li>{content.rating || <Skeleton />}</li>
 							</ul>
 
 							<h3>{content.title}</h3>
@@ -117,17 +84,17 @@ const MediaItem = ({ content, trending }) => {
 					{trending || (
 						<div className="MediaItem__details recommended">
 							<ul className="details recommended">
-								<li>{content.year}</li>
+								<li>{content.year || <Skeleton />}</li>
 								<span className="circle"></span>
 								<li>
 									<MovieIcon />
-									{content.category}
+									{content.category || <Skeleton />}
 								</li>
 								<span className="circle"></span>
-								<li>{content.rating}</li>
+								<li>{content.rating || <Skeleton />}</li>
 							</ul>
 
-							<h3>{content.title}</h3>
+							<h3>{content.title || <Skeleton />}</h3>
 						</div>
 					)}
 				</figcaption>

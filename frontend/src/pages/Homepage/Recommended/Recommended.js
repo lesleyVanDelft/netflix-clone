@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import { useSelector } from 'react-redux';
 import MediaItem from '../../../components/MediaItem/MediaItem';
 
@@ -22,11 +23,13 @@ const Recommended = ({ mediaList }) => {
 				{mediaList.length > 0 &&
 					mediaList.map((media, i) => {
 						return (
-							<MediaItem
-								content={media}
-								// bookmarkList={bookmarkList.includes(media._id)}
-								key={i}
-							/>
+							(
+								<MediaItem
+									content={media}
+									// bookmarkList={bookmarkList.includes(media._id)}
+									key={i}
+								/>
+							) || <Skeleton />
 						);
 					})}
 			</ul>

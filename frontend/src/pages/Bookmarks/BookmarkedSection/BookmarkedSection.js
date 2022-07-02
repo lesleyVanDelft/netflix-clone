@@ -2,33 +2,46 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import MediaItem from '../../../components/MediaItem/MediaItem';
 
-const BookmarkedSection = ({ category }) => {
+const BookmarkedSection = ({ category, mediaList }) => {
 	const userBookmarks = useSelector(state => state.user.user.bookmarkedMedia);
-	const [bookmarkList, setBookmarkList] = useState(userBookmarks);
-
+	const [bookmarkList, setBookmarkList] = useState(
+		mediaList.filter(bm => userBookmarks.includes(bm._id))
+	);
 	useEffect(() => {
-		setBookmarkList(userBookmarks);
-	}, [userBookmarks]);
+		setBookmarkList(mediaList.filter(bm => userBookmarks.includes(bm._id)));
+	}, [mediaList, userBookmarks]);
 
-	const movies = bookmarkList.filter(m => m.category === 'Movie');
-	const series = bookmarkList.filter(m => m.category !== 'Movie');
+	// console.log(bookmarkList);
+
+	// useEffect(() => {
+	// 	setBookmarkList(userBookmarks);
+	// }, [userBookmarks]);
+
+	const bookmarkedMovies =
+		bookmarkList.length > 0
+			? bookmarkList.filter(m => m.category === 'Movie')
+			: [];
+	const bookmarkedSeries =
+		bookmarkList.length > 0
+			? bookmarkList.filter(m => m.category !== 'Movie')
+			: [];
 
 	return (
 		<section className={`Bookmarked ${category}`}>
 			<h2 className="sectionHeader">Bookmarked {category && category}</h2>
 			{/* <ul className="content"> */}
-			{category === 'Movies' && (
+			{category === 'Movies' && bookmarkedMovies.length > 0 && (
 				<ul className="content">
-					{movies.map((m, i) => {
-						return <MediaItem content={m} key={i} />;
+					{bookmarkedMovies.map((m, i) => {
+						return <MediaItem content={m} key={i} trending={false} />;
 					})}
 				</ul>
 			)}
 
-			{category === 'Series' && (
+			{category === 'Series' && bookmarkedSeries.length > 0 && (
 				<ul className="content">
-					{series.map((m, i) => {
-						return <MediaItem content={m} key={i} />;
+					{bookmarkedSeries.map((m, i) => {
+						return <MediaItem content={m} key={i} trending={false} />;
 					})}
 				</ul>
 			)}

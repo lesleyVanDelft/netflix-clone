@@ -1,7 +1,7 @@
 import { createSlice, createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { logout } from '../userSlice/userSlice';
+// import { logout, login } from '../userSlice/userSlice';
 // import { getAllMedia } from '../mediaService/mediaService';
 
 // Gets jwt token from cookie and adds it to request header
@@ -14,7 +14,7 @@ const setConfig = () => {
 
 const initialState = {
 	media: [],
-	status: 'loggedOut',
+	status: 'idle',
 	error: null,
 };
 
@@ -41,11 +41,14 @@ const mediaSlice = createSlice({
 			.addCase(getAll.rejected, (state, action) => {
 				state.status = 'failed';
 				state.error = action.error.message;
-			})
-			.addCase(logout.fulfilled, (state, action) => {
-				state.media = [];
-				state.status = 'loggedOut';
 			});
+		// .addCase(login.fulfilled, (state, action) => {
+		// 	state.media = action.payload;
+		// })
+		// .addCase(logout.fulfilled, (state, action) => {
+		// 	state.media = [];
+		// 	state.status = 'loggedOut';
+		// });
 	},
 });
 

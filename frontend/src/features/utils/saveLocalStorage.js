@@ -5,5 +5,6 @@ export const saveLocalStorage = user => {
 
 export const logoutLocalStorage = () => {
 	localStorage.removeItem('user');
+	// localStorage.clear();
 	Cookies.remove('jwt');
 };
