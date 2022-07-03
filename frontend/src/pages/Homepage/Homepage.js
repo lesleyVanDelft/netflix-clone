@@ -21,12 +21,6 @@ const Homepage = () => {
 	const getValue = value => {
 		setSearchValue(value);
 	};
-	// console.log(bookmarks);
-	// useEffect(() => {
-	// 	if(loadStatus === 'loading'){
-
-	// 	}
-	// },[])
 
 	useEffect(() => {
 		if (userStorage === null) {
@@ -53,15 +47,10 @@ const Homepage = () => {
 	const trending = mediaList.filter(m => m.isTrending === true);
 	const recommended = mediaList.filter(m => m.isTrending !== true);
 
-	// const searched = mediaList.filter(m =>
-	// 	setSearchList(m.title.toLowerCase().includes(searchValue.toLowerCase()))
-	// );
-	// console.log(searchList);
-
 	return (
 		<>
-			<SearchBar getValue={getValue} placeholder="movies or TV series" />
 			<main className="Homepage">
+				<SearchBar getValue={getValue} placeholder="movies or TV series" />
 				{searchValue === '' ? (
 					<>
 						<Trending trendingList={trending} />

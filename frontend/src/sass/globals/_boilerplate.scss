@@ -18,9 +18,10 @@ html {
 
 body {
 	font-family: util.$font;
-	background-color: color.$darkBlue1;
+	background-color: black;
 	height: 100%;
-
+	width: min(100%, 1440px);
+	margin-inline: auto;
 	color: color.$white;
 	font-weight: typo.$fontWeightLight;
 }
@@ -28,7 +29,9 @@ ul {
 	list-style: none;
 }
 #root {
-	height: 100%;
+	min-height: 100%;
+	overflow-x: hidden;
+	background-color: color.$darkBlue1;
 }
 
 a,
@@ -37,6 +40,10 @@ a:visited {
 }
 .App {
 	height: 100%;
+	// width: fit-content;
+	@media screen and(min-width: 1024px) {
+		display: flex;
+	}
 }
 
 main {

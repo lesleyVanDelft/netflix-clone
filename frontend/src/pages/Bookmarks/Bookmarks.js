@@ -7,10 +7,8 @@ import BookmarkedSection from './BookmarkedSection/BookmarkedSection';
 
 const Bookmarks = () => {
 	const media = useSelector(state => state.media.media);
-	const bookmarks = useSelector(state => state.user.user.bookmarkedMedia);
 	const [mediaList, setMediaList] = useState(media);
 	const [searchList, setSearchList] = useState([]);
-	const [bookmarkList, setBookmarkList] = useState(bookmarks);
 	const [searchValue, setSearchValue] = useState('');
 
 	useEffect(() => {
@@ -29,20 +27,10 @@ const Bookmarks = () => {
 		setSearchValue(value);
 	};
 
-	// const bookmarkedMovies =
-	// 	// bookmarkList.length > 0
-	// 	// 	? bookmarkList.filter(bm => bm.category === 'Movie')
-	// 	// 	: [];
-	// 	[];
-	// const bookmarkedSeries = [];
-	// // bookmarkList.length > 0
-	// // 	? bookmarkList.filter(bm => bm.category !== 'Movie')
-	// // 	: [];
-
 	return (
 		<>
-			<SearchBar getValue={getValue} placeholder={'bookmarked content'} />
 			<main className="Bookmarks">
+				<SearchBar getValue={getValue} placeholder={'bookmarked content'} />
 				{searchValue === '' ? (
 					<>
 						<BookmarkedSection category={'Movies'} mediaList={mediaList} />

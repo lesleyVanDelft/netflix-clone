@@ -8,6 +8,15 @@
 	justify-content: space-between;
 	padding: 1rem;
 
+	@media screen and (min-width: 1024px) {
+		flex-direction: column;
+		height: min(40rem, 60rem);
+		margin: 1rem;
+		margin-right: 0;
+		border-radius: 10px;
+		padding: 1.5rem;
+	}
+
 	&__logo {
 		display: flex;
 		align-items: center;
@@ -23,13 +32,24 @@
 		display: flex;
 		align-items: center;
 		height: 100%;
+
+		@media screen and (min-width: 1024px) {
+			flex-direction: column;
+			justify-content: space-between;
+			height: min(12.5rem, 15rem);
+			margin-bottom: auto;
+			margin-top: 4.6875rem;
+		}
 		a {
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			margin-right: 1.8rem;
-
 			-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+			@media screen and (min-width: 1024px) {
+				margin: 0;
+			}
+
 			&:last-of-type {
 				margin: 0;
 			}
