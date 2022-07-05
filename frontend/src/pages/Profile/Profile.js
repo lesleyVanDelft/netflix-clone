@@ -1,16 +1,21 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import BlankProfilePic from '../../assets/blank-profile-picture.png';
 import { FaPlusCircle } from 'react-icons/fa';
+import { selectProfile } from '../../features/userSlice/userSlice';
 
 const Profile = () => {
 	const user = useSelector(state => state.user.user);
+	const dispatch = useDispatch();
 	return (
 		<main className="Profile">
 			<h1>Who's watching?</h1>
 			<div className="Profile__users">
 				{user.profiles.map(prof => {
 					return (
-						<div className="user" key={prof._id}>
+						<div
+							className="user"
+							key={prof._id}
+							onClick={() => dispatch(selectProfile(prof))}>
 							<img
 								src={
 									prof.profileImage.exists

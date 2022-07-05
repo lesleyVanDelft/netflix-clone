@@ -13,8 +13,8 @@ const Login = () => {
 	// const userStatus = useSelector(state => state.user.status);
 
 	useEffect(() => {
-		user.status === 'loggedIn' && navigate('/');
-		user.status === 'loggedIn' && saveLocalStorage(user);
+		user.status === 'success' && navigate('/');
+		user.status === 'success' && saveLocalStorage(user);
 	}, [user.status]);
 	// Register form
 	const formik = useFormik({

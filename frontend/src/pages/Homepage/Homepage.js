@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { getAll } from '../../features/mediaSlice/mediaSlice';
+import Profile from '../Profile/Profile';
 import Recommended from './Recommended/Recommended';
 import Search from './Search/Search';
 import Trending from './Trending/Trending';
@@ -29,6 +30,12 @@ const Homepage = () => {
 		}
 	}, [navigate, userStatus, userStorage]);
 
+	// useEffect(() => {
+	// 	if (loadStatus === 'success') {
+	// 		return <Profile />;
+	// 	}
+	// }, [loadStatus]);
+
 	useEffect(() => {
 		if (loadStatus === 'idle' && userStatus === 'loggedIn') {
 			dispatch(getAll());
@@ -50,18 +57,23 @@ const Homepage = () => {
 
 	return (
 		<>
-			<Navbar />
-			<main className="Homepage">
-				<SearchBar getValue={getValue} placeholder="movies or TV series" />
-				{searchValue === '' ? (
-					<>
-						<Trending trendingList={trending} />
-						<Recommended mediaList={recommended} />
-					</>
-				) : (
-					<Search searchList={searchList} value={searchValue} />
-				)}
-			</main>
+			{userStatus === 'success' && <Profile />}
+			{userStatus === 'loggedIn' && (
+				<>
+					<Navbar />
+					<main className="Homepage">
+						<SearchBar getValue={getValue} placeholder="movies or TV series" />
+						{searchValue === '' ? (
+							<>
+								<Trending trendingList={trending} />
+								<Recommended mediaList={recommended} />
+							</>
+						) : (
+							<Search searchList={searchList} value={searchValue} />
+						)}
+					</main>
+				</>
+			)}
 		</>
 	);
 };

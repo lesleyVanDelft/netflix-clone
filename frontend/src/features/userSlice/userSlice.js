@@ -1,7 +1,6 @@
 import { createSlice, createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { useSelector } from 'react-redux';
 import { logoutLocalStorage } from '../utils/saveLocalStorage';
 
 // Gets jwt token from cookie and adds it to request header
@@ -24,6 +23,20 @@ export const login = createAsyncThunk('user/login', async userObject => {
 export const logout = createAsyncThunk('user/logout', () => {
 	return logoutLocalStorage();
 });
+
+// export const setProfile = createAsyncThunk('user/setProfile', async () => {
+
+// });
+export const selectProfile = createAsyncThunk(
+	'user/setProfile',
+	async profile => {
+		return {
+			payload: {
+				profile,
+			},
+		};
+	}
+);
 
 export const addBookmark = createAsyncThunk(
 	'user/addBookmark',
@@ -85,12 +98,22 @@ const userSlice = createSlice({
 				state.status = 'pending';
 			})
 			.addCase(login.fulfilled, (state, action) => {
-				state.status = 'loggedIn';
+				state.status = 'success';
 				state.user = action.payload;
-				// state.user.bookmarkedMedia = [...state.user.bookmarkedMedia];
 				state.error = null;
 			})
 			.addCase(login.rejected, (state, action) => {
+				state.status = 'rejected';
+				state.error = action.error.message;
+			})
+			.addCase(selectProfile.pending, (state, action) => {
+				state.status = 'pending';
+			})
+			.addCase(selectProfile.fulfilled, (state, action) => {
+				state.status = 'loggedIn';
+				state.profile = action.payload;
+			})
+			.addCase(selectProfile.rejected, (state, action) => {
 				state.status = 'rejected';
 				state.error = action.error.message;
 			})
@@ -99,9 +122,7 @@ const userSlice = createSlice({
 			})
 			.addCase(logout.fulfilled, (state, action) => {
 				state.status = 'loggedOut';
-				// state.actions.reset();
 				state.user = null;
-				// state = initialState;
 			})
 			.addCase(logout.rejected, (state, action) => {
 				state.status = 'rejected';
@@ -128,13 +149,11 @@ const userSlice = createSlice({
 			.addCase(deleteBookmark.fulfilled, (state, action) => {
 				state.status = 'loggedIn';
 				action.payload = action.meta.arg;
-				console.log(action.payload._id);
+				// console.log(action.payload._id);
 
 				state.user.bookmarkedMedia = state.user.bookmarkedMedia.filter(
 					bookmark => bookmark !== action.payload._id
 				);
-				// state.user.bookmarkedMedia = state.user.bookmarkedMedia.map(bookmark => bookmark)
-				// .filter(bm => bm.toString() !== action.payload._id.toString())
 				state.error = null;
 			})
 			.addCase(deleteBookmark.rejected, (state, action) => {
