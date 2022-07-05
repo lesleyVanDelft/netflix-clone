@@ -30,17 +30,25 @@ const registerUser = async (req, res) => {
 			name,
 			email,
 			password: hashedPassword,
+			profiles: [
+				{
+					username: name,
+					bookmarkedMedia: [],
+				},
+			],
+			bookmarkedMedia: [],
 		});
 
-		const token = jwt.sign(
-			{
-				id: newUser._id,
-				name: newUser.name,
-				email: newUser.email,
-			},
-			process.env.JWT_SECRET,
-			{ expiresIn: maxAge }
-		);
+		const token = generateToken(newUser);
+		// const token = jwt.sign(
+		// 	{
+		// 		id: newUser._id,
+		// 		name: newUser.name,
+		// 		email: newUser.email,
+		// 	},
+		// 	process.env.JWT_SECRET,
+		// 	{ expiresIn: maxAge }
+		// );
 
 		res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
 

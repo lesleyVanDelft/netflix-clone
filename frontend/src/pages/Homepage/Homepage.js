@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../../components/Navbar/Navbar';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { getAll } from '../../features/mediaSlice/mediaSlice';
 import Recommended from './Recommended/Recommended';
@@ -49,6 +50,7 @@ const Homepage = () => {
 
 	return (
 		<>
+			<Navbar />
 			<main className="Homepage">
 				<SearchBar getValue={getValue} placeholder="movies or TV series" />
 				{searchValue === '' ? (

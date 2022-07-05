@@ -73,6 +73,7 @@ const userSlice = createSlice({
 				state.status = 'pending';
 			})
 			.addCase(register.fulfilled, (state, action) => {
+				action.payload = action.meta.arg;
 				state.status = 'success';
 				state.user = action.payload;
 			})

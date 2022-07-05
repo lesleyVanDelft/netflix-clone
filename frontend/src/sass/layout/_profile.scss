@@ -1,0 +1,97 @@
+@use '../globals/colors' as color;
+
+.Profile {
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	h1 {
+		// font-size: min(3rem, 3.5vw);
+		font-size: 2.9375rem;
+		margin: 2.5rem 0;
+	}
+
+	&__users {
+		display: flex;
+		align-items: center;
+		padding-bottom: 5rem;
+		// background-color: red;
+		.user {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-right: 1rem;
+			border: 2px inset transparent;
+			img {
+				border-radius: 5px;
+				width: 8.5625rem;
+				height: 8.5625rem;
+				object-fit: contain;
+				border: 2px inset transparent;
+			}
+
+			span {
+				font-size: 1.2rem;
+				color: color.$lightGray;
+				font-weight: 300;
+				letter-spacing: 0.2px;
+				padding-top: 1rem;
+			}
+
+			&.add {
+				.icon {
+					width: 8.5625rem;
+					height: 8.5625rem;
+					background-color: rgba(0, 0, 0, 0);
+					border-radius: 5px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					border: 2px inset transparent;
+					svg {
+						font-size: 4.5rem;
+						color: color.$lightGray;
+					}
+				}
+			}
+		}
+
+		// &--create {
+		// 	width: 8.5625rem;
+		// 	height: 8.5625rem;
+		// 	background-color: orange;
+		// 	svg {
+		// 		font-size: 4rem;
+		// 	}
+		// }
+	}
+}
+
+@media (hover: hover) {
+	.Profile {
+		&__users {
+			.user {
+				&:hover {
+					cursor: pointer;
+					img {
+						// transform: scale(1.2);
+						border: 2px inset color.$red;
+					}
+				}
+
+				&.add {
+					&:hover {
+						.icon {
+							cursor: pointer;
+							border: 2px inset color.$red;
+							background-color: color.$white2;
+						}
+					}
+				}
+			}
+		}
+	}
+}

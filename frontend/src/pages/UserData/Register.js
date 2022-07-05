@@ -1,14 +1,21 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import logo from '../../assets/logo.svg';
-import axios from 'axios';
 import { register } from '../../features/userSlice/userSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveLocalStorage } from '../../features/utils/saveLocalStorage';
 
 const Register = () => {
-	const [formData, setFormData] = useState({});
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const user = useSelector(state => state.user);
+	// const userStatus = useSelector(state => state.user.status);
+
+	useEffect(() => {
+		user.status === 'loggedIn' && saveLocalStorage(user);
+		user.status === 'loggedIn' && navigate('/');
+	}, [navigate, user, user.status]);
 
 	// Register form
 	const formik = useFormik({
@@ -32,14 +39,7 @@ const Register = () => {
 		// 	),
 		// }),
 		onSubmit: async values => {
-			// return await axios.post(
-			// 	'http://localhost:5000/api/users/register',
-			// 	values
-			// );
-			console.log(values);
-			return dispatch(register(values));
-			// console.log(values);
-			// return response.data
+			dispatch(register(values));
 		},
 	});
 

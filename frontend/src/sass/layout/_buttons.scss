@@ -23,4 +23,28 @@
 		font-size: 1rem;
 		font-weight: typo.$fontWeightLight;
 	}
+
+	&--profilePage {
+		border-radius: 0px;
+		width: 15%;
+		background-color: transparent;
+		border: 1px solid color.$lightGray;
+		color: color.$lightGray;
+		padding: 0.7rem 0;
+		font-size: 1rem;
+		letter-spacing: 0.3px;
+		line-height: 1.1;
+	}
+}
+
+@media (hover: hover) {
+	.btn {
+		&--profilePage {
+			cursor: pointer;
+			&:hover {
+				border: 1px solid color.$white2;
+				color: color.$white2;
+			}
+		}
+	}
 }

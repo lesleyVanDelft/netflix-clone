@@ -24,6 +24,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(morgan('tiny'));
 
+app.get('/', (req, res) => {
+	res.status(302).redirect('http://localhost:3000');
+});
+
 // Routes
 app.use('/api/users', authRoutes);
 app.use('/api/media', mediaRoutes);

@@ -17,6 +17,25 @@ const UserSchema = mongoose.Schema({
 		required: true,
 		minlength: [6, 'Password must be at least 6 characters'],
 	},
+	profiles: [
+		{
+			username: {
+				type: String,
+			},
+			profileImage: {
+				exists: {
+					type: Boolean,
+					default: false,
+				},
+				imageId: {
+					type: String,
+					trim: true,
+					default: 'null',
+				},
+			},
+			bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Media' }],
+		},
+	],
 	bookmarkedMedia: [
 		{
 			type: mongoose.Schema.Types.ObjectId,

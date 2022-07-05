@@ -3,12 +3,13 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import Bookmarks from './pages/Bookmarks/Bookmarks';
 import Homepage from './pages/Homepage/Homepage';
 import Movies from './pages/Movies/Movies';
+import Profile from './pages/Profile/Profile';
 import Test from './pages/Test';
 import TvShows from './pages/TvShows/TvShows';
 import Login from './pages/UserData/Login';
 import Register from './pages/UserData/Register';
 
-const AppRoutes = ({}) => {
+const AppRoutes = () => {
 	const userStatus = useSelector(state => state.user.status);
 	const location = useLocation();
 	// const cookie = Cookies.get('jwt');
@@ -32,7 +33,7 @@ const AppRoutes = ({}) => {
 			<Route path="/television" element={<TvShows />} />
 			<Route path="/bookmarks" element={<Bookmarks />} />
 			<Route exact path="/" element={<Homepage />} />
-			<Route path="/test" element={<Test />} />
+			<Route path="/test" element={<Profile />} />
 		</Routes>
 	);
 };

@@ -31,7 +31,7 @@ const Navbar = () => {
 			</figure>
 
 			<div className="Navbar__icons">
-				<NavLink to={'/'}>
+				<NavLink to={'/browse'}>
 					<NavHome className="navIcon home" />
 				</NavLink>
 				<NavLink to={'/movies'}>

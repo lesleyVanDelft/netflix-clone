@@ -24,7 +24,7 @@ function App() {
 	// console.log(bookmarks);
 	return (
 		<div className="App">
-			{userStatus !== 'loggedOut' && <Navbar />}
+			{/* {userStatus !== ('loggedOut' || 'rejected') && <Navbar />} */}
 			<AppRoutes />
 		</div>
 	);
