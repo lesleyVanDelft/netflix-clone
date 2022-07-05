@@ -8,11 +8,15 @@
 	user-select: none;
 	position: relative;
 
-	// &.bookmarked {
+	@media screen and (min-width: 1024px) {
+		max-width: 470px;
+	}
+
 	button.bookmarked {
 		background-color: color.$red;
 		opacity: 0.8;
 		// opacity: 0.5;
+
 		svg {
 			path {
 				fill: color.$white;
@@ -20,7 +24,6 @@
 			}
 		}
 	}
-	// }
 
 	button {
 		background-color: rgba(0, 0, 0, 0.5);
@@ -36,6 +39,14 @@
 		top: 8px;
 		right: 8px;
 		z-index: 100;
+		@media screen and (min-width: 1024px) {
+			cursor: pointer;
+			transition: 0.1s all ease-in-out;
+		}
+
+		&:hover {
+			opacity: 0.5;
+		}
 
 		svg {
 			transform: scale(1.2) rotate(1deg);
@@ -69,8 +80,10 @@
 			align-items: center;
 			width: 100%;
 			justify-content: space-between;
-			// background-color: red;
-			// list-style: disc inside;
+			@media screen and (min-width: 1024px) {
+				justify-content: flex-start;
+				font-size: 15px;
+			}
 			.circle {
 				width: 4px;
 				height: 4px;
@@ -84,12 +97,10 @@
 				align-items: center;
 				justify-content: center;
 				font-size: 13px;
-				// font-weight: lighter;
-				// font-size: 15px;
 				font-weight: 100;
 				letter-spacing: 0.5px;
 				opacity: 0.9;
-				// list-style: disc outside;
+
 				&::marker {
 					color: red;
 				}
@@ -109,9 +120,12 @@
 
 		h3 {
 			font-weight: typo.$fontWeightMedium;
-			font-size: 17px;
+			font-size: 1.0625rem;
 			letter-spacing: 0.5px;
 			padding-top: 0.2rem;
+			@media screen and (min-width: 1024px) {
+				font-size: 1.5rem;
+			}
 		}
 	}
 }
@@ -129,7 +143,7 @@
 				// background-color: red;
 				padding-top: 0.3rem;
 				padding-bottom: 0.3rem;
-				ul {
+				ul.details {
 					display: flex;
 					justify-content: flex-start;
 					align-items: center;
@@ -141,6 +155,11 @@
 					li {
 						// display: flex;
 						align-items: center;
+					}
+				}
+				h3 {
+					@media screen and (min-width: 1024px) {
+						font-size: 18px;
 					}
 				}
 			}

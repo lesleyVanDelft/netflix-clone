@@ -11,10 +11,14 @@
 	@media screen and (min-width: 1024px) {
 		flex-direction: column;
 		height: min(40rem, 60rem);
+		width: fit-content;
 		margin: 1rem;
-		margin-right: 0;
+		// margin-right: 0;
 		border-radius: 10px;
 		padding: 1.5rem;
+		position: absolute;
+		left: 0;
+		top: 0;
 	}
 
 	&__logo {

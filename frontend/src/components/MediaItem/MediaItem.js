@@ -6,6 +6,7 @@ import {
 	addBookmark,
 	deleteBookmark,
 } from '../../features/userSlice/userSlice';
+import { useMediaQuery } from 'react-responsive';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
@@ -24,6 +25,10 @@ const MediaItem = ({ content, trending }) => {
 	useEffect(() => {
 		setBookmark(isBookmarked);
 	}, [isBookmarked]);
+
+	const isDesktop = useMediaQuery({
+		query: '(min-width: 1024px)',
+	});
 
 	// const handleBookmark = () => {
 	// 	// if (isBookmarked.length > 0) {
@@ -55,14 +60,26 @@ const MediaItem = ({ content, trending }) => {
 			</button>
 
 			<figure>
-				<img
-					src={
-						content && trending
-							? content.thumbnail.trending.small
-							: content.thumbnail.regular.small
-					}
-					alt=""
-				/>
+				{isDesktop || (
+					<img
+						src={
+							content && trending
+								? content.thumbnail.trending.small
+								: content.thumbnail.regular.small
+						}
+						alt=""
+					/>
+				)}
+				{isDesktop && (
+					<img
+						src={
+							content && trending
+								? content.thumbnail.trending.large
+								: content.thumbnail.regular.large
+						}
+						alt=""
+					/>
+				)}
 				<figcaption>
 					{trending && (
 						<div className="MediaItem__details trending">

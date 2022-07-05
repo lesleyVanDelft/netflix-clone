@@ -2,9 +2,16 @@
 	padding-right: 0;
 	padding-bottom: 2rem;
 	max-width: 100%;
+	@media screen and (min-width: 1024px) {
+		padding-left: 7.5rem;
+	}
 	&__trending {
 		font-size: 1rem;
 		padding-right: 0;
+
+		@media screen and (min-width: 1024px) {
+			padding-right: 1rem;
+		}
 
 		h2 {
 			padding-bottom: 1rem;
@@ -13,26 +20,24 @@
 
 	&__recommended {
 		padding-right: 15px;
+		@media screen and (min-width: 1024px) {
+			padding-right: 2rem;
+		}
 		h2 {
 			padding: 1.5rem 0rem;
 		}
 		.content {
-			// display: grid;
 			display: grid;
 			grid-template-columns: 1fr 1fr;
 			grid-template-rows: auto;
-			gap: 15px;
+			gap: 1rem 0.9375rem;
 			list-style: none;
 
 			@media screen and (min-width: 1024px) {
+				gap: 2rem 2.5rem;
 				grid-template-columns: repeat(4, 1fr);
 			}
 		}
-		// ul.details {
-
-		// 	figure {
-		// 	}
-		// }
 	}
 
 	.Search {

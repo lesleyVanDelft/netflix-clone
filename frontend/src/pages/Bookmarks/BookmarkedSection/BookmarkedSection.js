@@ -27,7 +27,7 @@ const BookmarkedSection = ({ category, mediaList }) => {
 			: [];
 
 	return (
-		<section className={`Bookmarked ${category}`}>
+		<section className={`Bookmarked${category}`}>
 			<h2 className="sectionHeader">Bookmarked {category && category}</h2>
 			{/* <ul className="content"> */}
 			{category === 'Movies' && bookmarkedMovies.length > 0 && (

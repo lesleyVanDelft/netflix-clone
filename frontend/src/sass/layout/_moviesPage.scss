@@ -1,6 +1,11 @@
 .Movies,
 .Series,
 .Bookmarks {
+	// max-width: 100%;
+	@media screen and (min-width: 1024px) {
+		padding-left: 7.5rem;
+		padding-right: 1.5rem;
+	}
 	h2 {
 		padding-bottom: 1.5rem;
 	}
@@ -8,18 +13,31 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		grid-template-rows: auto;
-		gap: 1rem;
+		gap: 1rem 0.9375rem;
 		list-style: none;
-	}
-}
 
-.Bookmarks {
-	padding-bottom: 1.5rem;
+		@media screen and (min-width: 1024px) {
+			grid-template-columns: repeat(4, 1fr);
+			gap: 2rem 2.5rem;
+		}
+	}
+
 	.Bookmarked {
-		&.Series {
+		&Series {
 			h2 {
 				padding-top: 1.5rem;
 			}
 		}
 	}
 }
+
+// .Bookmarks {
+// 	padding-bottom: 1.5rem;
+// 	.Bookmarked {
+// 		&.Series {
+// 			h2 {
+// 				padding-top: 1.5rem;
+// 			}
+// 		}
+// 	}
+// }

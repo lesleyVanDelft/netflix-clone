@@ -19,7 +19,7 @@ const Recommended = ({ mediaList }) => {
 	return (
 		<section className="Homepage__recommended">
 			<h2 className="sectionHeader">Recommended for you</h2>
-			<ul className="content ">
+			<ul className="content recommended">
 				{mediaList.length > 0 &&
 					mediaList.map((media, i) => {
 						return (

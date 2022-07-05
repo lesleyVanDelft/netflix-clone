@@ -27,7 +27,7 @@ const TvShows = () => {
 	}, [mediaList]);
 
 	return (
-		<main className="Movies">
+		<main className="Series">
 			<SearchBar getValue={getValue} placeholder={'TV series'} />
 			<h2 className="sectionHeader">TV Series</h2>
 
