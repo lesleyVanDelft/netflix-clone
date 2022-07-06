@@ -34,6 +34,12 @@ export const selectProfile = createAsyncThunk(
 	}
 );
 
+export const addProfile = createAsyncThunk('user/addProfile', async data => {
+	const response = await axios.post('/api/users/addProfile', data);
+	return response.data;
+	// return console.log(data);
+});
+
 export const addBookmark = createAsyncThunk(
 	'user/addBookmark',
 	async postData => {

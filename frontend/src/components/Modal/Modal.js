@@ -1,10 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import BlankProfilePic from '../../assets/blank-profile-picture.png';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { BsCheck2 } from 'react-icons/bs';
+import { addProfile } from '../../features/userSlice/userSlice';
 
 const Modal = ({ setAddActive }) => {
 	const [checked, setChecked] = useState(false);
+	const [nameValue, setNameValue] = useState('');
+	const dispatch = useDispatch();
+
+	const handleChange = e => {
+		setNameValue(e.target.value);
+	};
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		dispatch(
+			addProfile({
+				username: nameValue,
+				profileImage: {
+					exists: false,
+					imageId: 'null',
+				},
+			})
+		);
+	};
+
 	return (
 		<div className="Modal">
 			<Logo className="Modal__logo" />
@@ -20,7 +42,12 @@ const Modal = ({ setAddActive }) => {
 					</div>
 
 					<div className="Modal__add--inputs">
-						<input type="text" placeholder={'Name'} />
+						<input
+							type="text"
+							placeholder={'Name'}
+							onChange={handleChange}
+							value={nameValue}
+						/>
 						<div className="child-checkbox">
 							<input type="checkbox" id="child-profile" />
 							<label
@@ -42,7 +69,9 @@ const Modal = ({ setAddActive }) => {
 				</div>
 
 				<div className="Modal__buttons">
-					<button className="continue">Continue</button>
+					<button className="continue" onClick={handleSubmit}>
+						Continue
+					</button>
 					<button
 						className="cancel"
 						onClick={prevState => setAddActive(!prevState)}>
