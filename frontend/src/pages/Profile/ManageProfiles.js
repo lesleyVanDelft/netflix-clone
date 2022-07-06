@@ -4,15 +4,21 @@ import BlankProfilePic from '../../assets/blank-profile-picture.png';
 import { FaPlusCircle } from 'react-icons/fa';
 import { TiPencil } from 'react-icons/ti';
 import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import ManageModal from './ManageModal';
 
 const ManageProfiles = () => {
 	// const [addActive, setAddActive] = useState(false);
+	const [editActive, setEditActive] = useState(false);
+	const [profileData, setProfileData] = useState();
 	const user = useSelector(state => state.user.user);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	return (
 		<main className="ManageProfiles">
-			{/* {addActive && <Modal setAddActive={setAddActive} />} */}
+			{editActive && (
+				<ManageModal setEditActive={setEditActive} profileData={profileData} />
+			)}
 			<h1>Manage Profiles:</h1>
 			<div className="ManageProfiles__users">
 				{user.profiles &&
@@ -21,11 +27,10 @@ const ManageProfiles = () => {
 							<div
 								className="user"
 								key={i}
-								onClick={() => dispatch(selectProfile(prof))}>
-								{/* <div className="overlay">
-									<TiPencil />
-								</div> */}
-
+								onClick={() => {
+									setEditActive(true);
+									setProfileData(prof);
+								}}>
 								<div className="avatar-wrapper">
 									<img
 										src={

@@ -25,6 +25,7 @@ const Modal = ({ setAddActive }) => {
 				},
 			})
 		);
+		setNameValue('');
 	};
 
 	return (
