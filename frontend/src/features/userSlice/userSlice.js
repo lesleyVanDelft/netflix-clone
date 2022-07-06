@@ -123,6 +123,18 @@ const userSlice = createSlice({
 				state.status = 'rejected';
 				state.error = action.error.message;
 			})
+			.addCase(addProfile.pending, (state, action) => {
+				state.status = 'pending';
+			})
+			.addCase(addProfile.fulfilled, (state, action) => {
+				action.payload = action.meta.arg;
+				state.status = 'success';
+				state.user.profiles = state.user.profiles.concat(action.payload);
+			})
+			.addCase(addProfile.rejected, (state, action) => {
+				state.status = 'rejected';
+				state.error = action.error.message;
+			})
 			.addCase(logout.pending, (state, action) => {
 				state.status = 'pending';
 			})
