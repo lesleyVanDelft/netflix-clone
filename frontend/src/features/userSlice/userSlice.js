@@ -30,19 +30,18 @@ export const logout = createAsyncThunk('user/logout', () => {
 export const selectProfile = createAsyncThunk(
 	'user/setProfile',
 	async profile => {
-		return {
-			payload: {
-				profile,
-			},
-		};
+		return profile;
 	}
 );
 
 export const addBookmark = createAsyncThunk(
 	'user/addBookmark',
-	async content => {
+	async postData => {
+		//  console.log(postData.data);
+		// const { data } = postData;
 		const response = await axios.post(
-			`/api/bookmarks/add/${content._id}`,
+			`/api/bookmarks/add/${postData.content._id}`,
+			// currProfile._id,
 			null,
 			setConfig()
 		);
@@ -112,6 +111,7 @@ const userSlice = createSlice({
 			.addCase(selectProfile.fulfilled, (state, action) => {
 				state.status = 'loggedIn';
 				state.profile = action.payload;
+				// state.profile.bookmarks = state.user.bookmarkedMedia;
 			})
 			.addCase(selectProfile.rejected, (state, action) => {
 				state.status = 'rejected';
@@ -123,6 +123,7 @@ const userSlice = createSlice({
 			.addCase(logout.fulfilled, (state, action) => {
 				state.status = 'loggedOut';
 				state.user = null;
+				state.profile = null;
 			})
 			.addCase(logout.rejected, (state, action) => {
 				state.status = 'rejected';
@@ -136,7 +137,10 @@ const userSlice = createSlice({
 				action.payload = action.meta.arg;
 
 				state.user.bookmarkedMedia = state.user.bookmarkedMedia.concat(
-					action.payload._id
+					action.payload.content._id
+				);
+				state.profile.bookmarks = state.profile.bookmarks.concat(
+					action.payload.content._id
 				);
 			})
 			.addCase(addBookmark.rejected, (state, action) => {
@@ -152,7 +156,11 @@ const userSlice = createSlice({
 				// console.log(action.payload._id);
 
 				state.user.bookmarkedMedia = state.user.bookmarkedMedia.filter(
-					bookmark => bookmark !== action.payload._id
+					bookmark => bookmark !== action.payload.content._id
+				);
+
+				state.profile.bookmarks = state.profile.bookmarks.filter(
+					bookmark => bookmark !== action.payload.content._id
 				);
 				state.error = null;
 			})

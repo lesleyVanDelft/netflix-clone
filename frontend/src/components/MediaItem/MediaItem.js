@@ -16,6 +16,14 @@ const MediaItem = ({ content, trending }) => {
 	const isBookmarked =
 		user && user.user && user.user.bookmarkedMedia.includes(currentMedia._id);
 	const [bookmark, setBookmark] = useState(isBookmarked);
+	const currProfile = useSelector(state => state.user.profile);
+	const [currentProfile, setCurrentProfile] = useState(currProfile);
+	const [postData, setPostData] = useState({
+		data: {
+			content: content,
+			profile: currProfile,
+		},
+	});
 
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -26,21 +34,20 @@ const MediaItem = ({ content, trending }) => {
 		setBookmark(isBookmarked);
 	}, [isBookmarked]);
 
+	useEffect(() => {
+		setCurrentProfile(currProfile);
+	}, [currProfile]);
+
+	useEffect(() => {
+		setPostData({
+			content: currentMedia,
+			profile: currentProfile,
+		});
+	}, [currentMedia, currentProfile]);
+
 	const isDesktop = useMediaQuery({
 		query: '(min-width: 1024px)',
 	});
-
-	// const handleBookmark = () => {
-	// 	// if (isBookmarked.length > 0) {
-	// 	// dispatch(deleteBookmark(content));
-	// 	// } else {
-
-	// 	// user.user.bookmarkedMedia[0] !== currentMedia._id
-	// 	// 	? dispatch(addBookmark(content))
-	// 	// 	: dispatch(deleteBookmark(content));
-	// 	dispatch(addBookmark(content));
-	// 	// }
-	// };
 
 	return (
 		<li className={`MediaItem ${trending ? 'trending' : 'recommended'} `}>
@@ -48,10 +55,10 @@ const MediaItem = ({ content, trending }) => {
 				type="button"
 				onClick={() => {
 					if (bookmark) {
-						dispatch(deleteBookmark(content));
+						dispatch(deleteBookmark(postData));
 						setBookmark(false);
 					} else if (!bookmark) {
-						dispatch(addBookmark(content));
+						dispatch(addBookmark(postData));
 						setBookmark(true);
 					}
 				}}

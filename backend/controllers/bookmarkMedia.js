@@ -8,6 +8,7 @@ const setBookmark = async (req, res) => {
 	const { mediaId } = req.params;
 	const user = await User.findById(decoded.id);
 	const mediaItem = await Media.findById(mediaId);
+	console.log(req.body);
 
 	if (!user) {
 		return res.status(401).json('User not found');

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import MediaItem from '../../components/MediaItem/MediaItem';
+import Navbar from '../../components/Navbar/Navbar';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import Search from '../Homepage/Search/Search';
 
@@ -27,20 +28,23 @@ const TvShows = () => {
 	}, [mediaList]);
 
 	return (
-		<main className="Series">
-			<SearchBar getValue={getValue} placeholder={'TV series'} />
-			<h2 className="sectionHeader">TV Series</h2>
+		<>
+			<Navbar />
+			<main className="Series">
+				<SearchBar getValue={getValue} placeholder={'TV series'} />
+				<h2 className="sectionHeader">TV Series</h2>
 
-			{searchValue === '' ? (
-				<ul className="content">
-					{tvList.map((m, i) => {
-						return <MediaItem content={m} key={i} />;
-					})}
-				</ul>
-			) : (
-				<Search searchList={searchList} value={searchValue} />
-			)}
-		</main>
+				{searchValue === '' ? (
+					<ul className="content">
+						{tvList.map((m, i) => {
+							return <MediaItem content={m} key={i} />;
+						})}
+					</ul>
+				) : (
+					<Search searchList={searchList} value={searchValue} />
+				)}
+			</main>
+		</>
 	);
 };
 

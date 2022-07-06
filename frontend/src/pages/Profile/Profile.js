@@ -10,24 +10,25 @@ const Profile = () => {
 		<main className="Profile">
 			<h1>Who's watching?</h1>
 			<div className="Profile__users">
-				{user.profiles.map(prof => {
-					return (
-						<div
-							className="user"
-							key={prof._id}
-							onClick={() => dispatch(selectProfile(prof))}>
-							<img
-								src={
-									prof.profileImage.exists
-										? prof.profileImage.imageId
-										: BlankProfilePic
-								}
-								alt="user profile avatar"
-							/>
-							<span className="user__profileName">{prof.username}</span>
-						</div>
-					);
-				})}
+				{user.profiles &&
+					user.profiles.map((prof, i) => {
+						return (
+							<div
+								className="user"
+								key={i}
+								onClick={() => dispatch(selectProfile(prof))}>
+								<img
+									src={
+										prof.profileImage.exists
+											? prof.profileImage.imageId
+											: BlankProfilePic
+									}
+									alt="user profile avatar"
+								/>
+								<span className="user__profileName">{prof.username}</span>
+							</div>
+						);
+					})}
 
 				{/* <div className="Profile__users--create"> */}
 				<div className="user add">
