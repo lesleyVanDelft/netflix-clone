@@ -27,6 +27,7 @@
 	&--profilePage {
 		border-radius: 0px;
 		width: 15%;
+		width: min(10%, 15%);
 		background-color: transparent;
 		border: 1px solid color.$lightGray;
 		color: color.$lightGray;
