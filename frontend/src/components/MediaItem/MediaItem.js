@@ -13,8 +13,10 @@ import Skeleton from 'react-loading-skeleton';
 const MediaItem = ({ content, trending }) => {
 	const user = useSelector(state => state.user);
 	const [currentMedia, setCurrentMedia] = useState(content);
+	// const isBookmarked =
+	// 	user && user.user && user.user.bookmarkedMedia.includes(currentMedia._id);
 	const isBookmarked =
-		user && user.user && user.user.bookmarkedMedia.includes(currentMedia._id);
+		user && user.profile && user.profile.bookmarks.includes(currentMedia._id);
 	const [bookmark, setBookmark] = useState(isBookmarked);
 	const currProfile = useSelector(state => state.user.profile);
 	const [currentProfile, setCurrentProfile] = useState(currProfile);

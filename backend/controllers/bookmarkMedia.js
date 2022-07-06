@@ -8,7 +8,14 @@ const setBookmark = async (req, res) => {
 	const { mediaId } = req.params;
 	const user = await User.findById(decoded.id);
 	const mediaItem = await Media.findById(mediaId);
-	console.log(req.body);
+	// console.log(req.body);
+	const { profileData } = req.body;
+	const currentProfile = user.profiles.filter(
+		profile => profile !== profileData._id
+	);
+	// const profileObject = Object.assign({}, ...currentProfile);
+	// console.log(profileObject);
+	// console.log(currentProfile[0].bookmarks);
 
 	if (!user) {
 		return res.status(401).json('User not found');
@@ -17,6 +24,10 @@ const setBookmark = async (req, res) => {
 	if (!mediaId) {
 		return res.status(400).json('Media not found');
 	}
+
+	// if (!currentProfile) {
+	// 	return res.status(400).json('Profile not found');
+	// }
 
 	if (user.bookmarkedMedia.includes(mediaItem._id)) {
 		user.bookmarkedMedia = user.bookmarkedMedia
@@ -28,6 +39,20 @@ const setBookmark = async (req, res) => {
 	} else {
 		user.bookmarkedMedia = user.bookmarkedMedia.concat(mediaItem._id);
 		// console.log('false');
+		await user.save();
+	}
+
+	// console.log(currentProfile.bookmarks);
+
+	if (currentProfile.includes(mediaItem._id)) {
+		currentProfile[0].bookmarks = currentProfile[0].bookmarks
+			.map(bookmark => bookmark)
+			.filter(bm => bm.toString() !== mediaItem._id.toString());
+		await user.save();
+	} else {
+		currentProfile[0].bookmarks = currentProfile[0].bookmarks.concat(
+			mediaItem._id
+		);
 		await user.save();
 	}
 

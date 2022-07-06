@@ -1,0 +1,225 @@
+@use '../globals/colors' as color;
+@use '../globals/typography' as typo;
+
+.Modal {
+	z-index: 100;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 1;
+	transform: scale(1);
+	transition-duration: 450ms;
+	transition-delay: 200ms;
+	background-color: color.$darkBlue1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	// text-align: left;
+
+	&__logo {
+		position: absolute;
+		left: 3rem;
+		top: 3rem;
+	}
+
+	&__text {
+		width: 100%;
+		// display: flex;
+		// flex-direction: column;
+		// align-items: center;
+		// justify-content: center;
+		// text-align: left;
+		line-height: 1.5;
+		h1 {
+			margin: 0;
+			font-size: 4vw;
+		}
+		h2 {
+			color: color.$lightGray;
+			font-size: 1.3rem;
+			opacity: 0.9;
+		}
+	}
+
+	&__add {
+		display: flex;
+		padding: 1.3rem 0;
+		margin: 1rem 0 2rem 0;
+		border-bottom: 1px solid darken($color: color.$lightGray, $amount: 30%);
+		border-top: 1px solid darken($color: color.$lightGray, $amount: 30%);
+		&--avatar {
+			img {
+				max-width: 110px;
+				border-radius: 5px;
+				margin-right: 1rem;
+			}
+		}
+
+		&--inputs {
+			display: flex;
+			align-items: center;
+
+			input[type='text'] {
+				border: none;
+				font-family: inherit;
+				font-size: 17px;
+				padding: 0.5rem 1rem;
+				margin-right: 1rem;
+				width: 19rem;
+				background-color: color.$lightGray2;
+				color: color.$white;
+				font-weight: 300;
+
+				&::placeholder {
+					color: inherit;
+				}
+				&:focus {
+					outline: none;
+				}
+			}
+
+			input[type='checkbox'] {
+				display: none;
+
+				&:checked + label {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					svg {
+						font-size: 2rem;
+					}
+				}
+
+				& + label {
+					border: 1px solid #333;
+					border-radius: 0;
+					position: relative;
+					width: 1.81rem;
+					height: 1.81rem;
+					margin-right: 0.3rem;
+
+					// border: 1px solid #333;
+					// -webkit-border-radius: 0;
+					// -moz-border-radius: 0;
+					// border-radius: 0;
+					display: inline-block;
+					position: relative;
+					// margin-right: 0.5em;
+					// font-size: 0.8vw;
+					// width: 2.5em;
+					// height: 2.5em;
+				}
+			}
+
+			.child-checkbox {
+				position: relative;
+				// cursor: pointer;
+				display: flex;
+				align-items: center;
+
+				.child-profile-tooltip {
+					position: absolute;
+					width: min(15rem, 17rem);
+					background-color: color.$white;
+					color: color.$black;
+					padding: 0.5rem;
+					text-align: center;
+					font-size: 15px;
+					left: -6rem;
+					bottom: 3rem;
+					z-index: -1;
+					opacity: 0;
+					// transition: opacity 0.3s linear 50ms, z-index 1ms linear 350ms;
+					transition: all 0.25s ease-in-out;
+
+					&::after {
+						content: '';
+						position: absolute;
+						top: 100%;
+						left: 50%;
+						border: solid transparent;
+						height: 0;
+						width: 0;
+						pointer-events: none;
+						border-top-color: white;
+						border-width: 0.7rem;
+						margin-left: -0.7rem;
+					}
+				}
+			}
+		}
+	}
+
+	&__buttons {
+		button {
+			border: none;
+			margin-right: 1rem;
+			background-color: transparent;
+			border: 1px solid color.$white2;
+			color: color.$white2;
+			font-family: inherit;
+			font-size: 1.1rem;
+			letter-spacing: 1px;
+			padding: 0.5rem 1.5rem;
+			cursor: pointer;
+			&:last-of-type {
+				margin: 0;
+			}
+		}
+
+		.continue {
+			// background-color: color.$white2;
+			color: color.$black;
+			background-image: linear-gradient(30deg, white 50%, color.$red 50%);
+			// background-image: linear-gradient(-180deg, color.$red 50%, white 50%);
+			background-repeat: no-repeat;
+			background-size: 31.25rem;
+			background-position: 0%;
+			transition: all 0.3s ease-in-out;
+		}
+
+		.cancel {
+			opacity: 0.8;
+			transition: all 0.1s ease-in-out;
+		}
+	}
+}
+@media (hover: hover) {
+	.Modal {
+		&__add {
+			&--inputs {
+				.child-checkbox {
+					cursor: default;
+					&:hover {
+						.child-profile-tooltip {
+							z-index: 101;
+							opacity: 1;
+						}
+					}
+				}
+			}
+		}
+
+		&__buttons {
+			.continue {
+				&:hover {
+					// background-color: color.$red;
+					color: color.$white2;
+					background-position: 100%;
+				}
+			}
+
+			.cancel {
+				&:hover {
+					opacity: 1;
+					border: 1px solid color.$red;
+				}
+			}
+		}
+	}
+}

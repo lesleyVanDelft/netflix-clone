@@ -41,8 +41,8 @@ export const addBookmark = createAsyncThunk(
 		// const { data } = postData;
 		const response = await axios.post(
 			`/api/bookmarks/add/${postData.content._id}`,
-			// currProfile._id,
-			null,
+			{ profileData: postData.profile },
+			// null,
 			setConfig()
 		);
 		// console.log(response.data);
@@ -53,10 +53,10 @@ export const addBookmark = createAsyncThunk(
 // maybe mediaitem dispatch on bookmarkedmedia filter
 export const deleteBookmark = createAsyncThunk(
 	'user/deleteBookmark',
-	async content => {
+	async postData => {
 		const response = await axios.post(
-			`/api/bookmarks/add/${content._id}`,
-			null,
+			`/api/bookmarks/add/${postData.content._id}`,
+			{ profileData: postData.profile },
 			setConfig()
 		);
 		// console.log(response.data);
