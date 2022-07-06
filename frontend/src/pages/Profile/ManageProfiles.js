@@ -3,11 +3,12 @@ import { selectProfile } from '../../features/userSlice/userSlice';
 import BlankProfilePic from '../../assets/blank-profile-picture.png';
 import { FaPlusCircle } from 'react-icons/fa';
 import { TiPencil } from 'react-icons/ti';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ManageProfiles = () => {
 	// const [addActive, setAddActive] = useState(false);
 	const user = useSelector(state => state.user.user);
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	return (
 		<main className="ManageProfiles">
@@ -51,8 +52,9 @@ const ManageProfiles = () => {
 				</div>
 			</div>
 
-			<button className="btn btn--profilePage">
-				<Link to="/">Done</Link>
+			<button className="btn btn--profilePage" onClick={() => navigate('/')}>
+				Done
+				{/* <Link to="/">Done</Link> */}
 			</button>
 		</main>
 	);

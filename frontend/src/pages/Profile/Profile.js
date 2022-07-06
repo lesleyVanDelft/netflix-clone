@@ -4,11 +4,12 @@ import { FaPlusCircle } from 'react-icons/fa';
 import { selectProfile } from '../../features/userSlice/userSlice';
 import { useState } from 'react';
 import Modal from '../../components/Modal/Modal';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Profile = () => {
 	const [addActive, setAddActive] = useState(false);
 	const user = useSelector(state => state.user.user);
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	return (
 		<main className="Profile">
@@ -44,8 +45,10 @@ const Profile = () => {
 				</div>
 			</div>
 
-			<button className="btn btn--profilePage">
-				<Link to="/manageProfiles">Manage profiles</Link>
+			<button
+				className="btn btn--profilePage"
+				onClick={() => navigate('/manageProfiles')}>
+				Manage profiles
 			</button>
 		</main>
 	);
