@@ -24,9 +24,6 @@ export const logout = createAsyncThunk('user/logout', () => {
 	return logoutLocalStorage();
 });
 
-// export const setProfile = createAsyncThunk('user/setProfile', async () => {
-
-// });
 export const selectProfile = createAsyncThunk(
 	'user/setProfile',
 	async profile => {
@@ -37,26 +34,25 @@ export const selectProfile = createAsyncThunk(
 export const addProfile = createAsyncThunk('user/addProfile', async data => {
 	const response = await axios.post('/api/users/addProfile', data);
 	return response.data;
-	// return console.log(data);
+});
+
+export const editProfile = createAsyncThunk('user/editProfile', async data => {
+	const response = await axios.post('/api/users/editProfile', data);
+	return response.data;
 });
 
 export const addBookmark = createAsyncThunk(
 	'user/addBookmark',
 	async postData => {
-		//  console.log(postData.data);
-		// const { data } = postData;
 		const response = await axios.post(
 			`/api/bookmarks/add/${postData.content._id}`,
 			{ profileData: postData.profile },
-			// null,
 			setConfig()
 		);
-		// console.log(response.data);
 		return response.data;
 	}
 );
 
-// maybe mediaitem dispatch on bookmarkedmedia filter
 export const deleteBookmark = createAsyncThunk(
 	'user/deleteBookmark',
 	async postData => {
@@ -132,6 +128,19 @@ const userSlice = createSlice({
 				state.user.profiles = state.user.profiles.concat(action.payload);
 			})
 			.addCase(addProfile.rejected, (state, action) => {
+				state.status = 'rejected';
+				state.error = action.error.message;
+			})
+			.addCase(editProfile.pending, (state, action) => {
+				state.status = 'pending';
+			})
+			.addCase(editProfile.fulfilled, (state, action) => {
+				state.status = 'success';
+				action.payload = action.meta.arg;
+				// state.user.profiles = state.user.profiles.filter(prof => prof._id.toString === action.payload._id.toString())
+				// state.profiles = action.payload;
+			})
+			.addCase(editProfile.rejected, (state, action) => {
 				state.status = 'rejected';
 				state.error = action.error.message;
 			})

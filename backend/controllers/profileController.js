@@ -20,4 +20,23 @@ const addProfile = async (req, res) => {
 	// res.status(200).send('addProfile');
 };
 
-module.exports = { addProfile };
+const editProfile = async (req, res) => {
+	const token = req.cookies.jwt;
+	const decoded = jwt.verify(token, process.env.JWT_SECRET);
+	const user = await User.findById(decoded.id);
+	const currentProfile = user.profiles.filter(
+		profile => profile._id.toString() === req.body.profileId.toString()
+	);
+
+	if (!user) {
+		return res.status(400).json('User not found');
+	} else {
+		currentProfile[0].username = req.body.username;
+		await user.save();
+		// console.log(currentProfile);
+	}
+
+	res.status(201).end();
+};
+
+module.exports = { addProfile, editProfile };
