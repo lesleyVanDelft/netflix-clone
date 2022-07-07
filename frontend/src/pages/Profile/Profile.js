@@ -7,6 +7,7 @@ import { useState } from 'react';
 import Modal from '../../components/Modal/Modal';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
+import { pageVariant } from '../../framerVariants';
 
 const Profile = () => {
 	const [addActive, setAddActive] = useState(false);
@@ -18,8 +19,13 @@ const Profile = () => {
 			<AnimatePresence>
 				{addActive && <Modal setAddActive={setAddActive} active={addActive} />}
 			</AnimatePresence>
-			<Logo className="pageLogo" />
-			<main className="Profile">
+			<motion.main
+				className="Profile"
+				variants={pageVariant}
+				initial="initial"
+				animate="animate"
+				exit="exit">
+				<Logo className="pageLogo" />
 				<h1>Who's watching?</h1>
 				<div className="Profile__users">
 					{user.profiles &&
@@ -56,7 +62,7 @@ const Profile = () => {
 					onClick={() => navigate('/manageProfiles')}>
 					Manage profiles
 				</button>
-			</main>
+			</motion.main>
 		</>
 	);
 };

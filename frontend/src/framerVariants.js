@@ -19,3 +19,33 @@ export const modalVariant = {
 		},
 	},
 };
+
+export const pageVariant = {
+	initial: {
+		opacity: 0,
+	},
+	animate: {
+		opacity: 1,
+	},
+	exit: {
+		opacity: 0,
+	},
+	transition: {
+		// duration: 0.05,
+	},
+};
+
+export const dropdownVariant = {
+	initial: {
+		opacity: 0,
+		y: '-20px',
+	},
+	animate: {
+		opacity: 1,
+		y: '20px',
+	},
+	exit: {
+		opacity: 0,
+		// y: '0px',
+	},
+};

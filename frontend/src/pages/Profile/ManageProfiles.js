@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProfile } from '../../features/userSlice/userSlice';
+import { ReactComponent as Logo } from '../../assets/logo.svg';
 import BlankProfilePic from '../../assets/blank-profile-picture.png';
 import { FaPlusCircle } from 'react-icons/fa';
 import { TiPencil } from 'react-icons/ti';
@@ -16,6 +17,7 @@ const ManageProfiles = () => {
 	const dispatch = useDispatch();
 	return (
 		<main className="ManageProfiles">
+			<Logo className="pageLogo" />
 			<AnimatePresence>
 				{editActive && (
 					<ManageModal

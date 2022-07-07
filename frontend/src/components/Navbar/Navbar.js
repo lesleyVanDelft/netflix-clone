@@ -12,15 +12,14 @@ import DropdownItem from '../Dropdown/DropdownItem/DropdownItem';
 import { logout } from '../../features/userSlice/userSlice';
 import { logoutLocalStorage } from '../../features/utils/saveLocalStorage';
 import { useDispatch } from 'react-redux';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 const Navbar = () => {
 	const [active, setActive] = useState(false);
-	// const userProfileRef = useRef(active);
-
-	// useEffect(() => {
-	// 	userProfileRef.current.active();
-	// }, []);
-	// console.log(userProfileRef.current);
+	const dropdownRef = useRef(null);
+	useOutsideClick(dropdownRef, () => {
+		active && setActive(false);
+	});
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -45,7 +44,10 @@ const Navbar = () => {
 				</NavLink>
 			</div>
 
-			<div className="Navbar__user" onClick={() => setActive(!active)}>
+			<div
+				className="Navbar__user"
+				onClick={() => setActive(!active)}
+				ref={dropdownRef}>
 				<img src={navBlankProfile} alt="User avatar" className="userAvatar" />
 				{active && (
 					<Dropdown>

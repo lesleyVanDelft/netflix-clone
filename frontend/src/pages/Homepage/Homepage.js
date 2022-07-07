@@ -8,6 +8,8 @@ import Profile from '../Profile/Profile';
 import Recommended from './Recommended/Recommended';
 import Search from './Search/Search';
 import Trending from './Trending/Trending';
+import { pageVariant } from '../../framerVariants';
+import { motion } from 'framer-motion';
 
 const Homepage = () => {
 	const loadStatus = useSelector(state => state.media.status);
@@ -61,7 +63,12 @@ const Homepage = () => {
 			{userStatus === 'loggedIn' && (
 				<>
 					<Navbar />
-					<main className="Homepage">
+					<motion.main
+						className="Homepage"
+						variants={pageVariant}
+						initial="initial"
+						animate="animate"
+						exit="exit">
 						<SearchBar getValue={getValue} placeholder="movies or TV series" />
 						{searchValue === '' ? (
 							<>
@@ -71,7 +78,7 @@ const Homepage = () => {
 						) : (
 							<Search searchList={searchList} value={searchValue} />
 						)}
-					</main>
+					</motion.main>
 				</>
 			)}
 		</>

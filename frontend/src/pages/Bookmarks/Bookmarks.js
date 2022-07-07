@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import MediaItem from '../../components/MediaItem/MediaItem';
+import { motion } from 'framer-motion';
 import Navbar from '../../components/Navbar/Navbar';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import { pageVariant } from '../../framerVariants';
 import Search from '../Homepage/Search/Search';
 import BookmarkedSection from './BookmarkedSection/BookmarkedSection';
 
@@ -31,7 +32,12 @@ const Bookmarks = () => {
 	return (
 		<>
 			<Navbar />
-			<main className="Bookmarks">
+			<motion.main
+				className="Bookmarks"
+				variants={pageVariant}
+				initial="initial"
+				animate="animate"
+				exit="exit">
 				<SearchBar getValue={getValue} placeholder={'bookmarked content'} />
 				{searchValue === '' ? (
 					<>
@@ -41,7 +47,7 @@ const Bookmarks = () => {
 				) : (
 					<Search searchList={searchList} value={searchValue} />
 				)}
-			</main>
+			</motion.main>
 		</>
 	);
 };

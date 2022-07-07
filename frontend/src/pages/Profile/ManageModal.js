@@ -2,16 +2,27 @@ import BlankProfilePic from '../../assets/blank-profile-picture.png';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { GoTriangleDown } from 'react-icons/go';
 import { TiPencil } from 'react-icons/ti';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editProfile } from '../../features/userSlice/userSlice';
 import { modalVariant } from '../../framerVariants';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import Dropdown from '../../components/Dropdown/Dropdown';
+import DropdownItem from '../../components/Dropdown/DropdownItem/DropdownItem';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 const ManageModal = ({ setEditActive, profileData }) => {
 	const [username, setUsername] = useState(profileData.username);
 	const [editData, setEditData] = useState(profileData);
+	const [dropdownActive, setDropdownActive] = useState(false);
+	const dropdownRef = useRef(null);
 	const dispatch = useDispatch();
+
+	useOutsideClick(dropdownRef, () => {
+		if (dropdownActive) {
+			setDropdownActive(false);
+		}
+	});
 
 	useEffect(() => {
 		setEditData(profileData);
@@ -57,11 +68,18 @@ const ManageModal = ({ setEditActive, profileData }) => {
 						onChange={handleChange}
 					/>
 
-					<div className="language">
+					<div className="language" ref={dropdownRef}>
 						<span>Language:</span>
-						<button>
+						<button onClick={() => setDropdownActive(!dropdownActive)}>
 							English <GoTriangleDown />
 						</button>
+						<AnimatePresence>
+							{dropdownActive && (
+								<Dropdown>
+									<DropdownItem>English</DropdownItem>
+								</Dropdown>
+							)}
+						</AnimatePresence>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
+import { pageVariant } from '../../framerVariants';
 import MediaItem from '../../components/MediaItem/MediaItem';
 import Navbar from '../../components/Navbar/Navbar';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -30,7 +32,12 @@ const TvShows = () => {
 	return (
 		<>
 			<Navbar />
-			<main className="Series">
+			<motion.main
+				className="Series"
+				variants={pageVariant}
+				initial="initial"
+				animate="animate"
+				exit="exit">
 				<SearchBar getValue={getValue} placeholder={'TV series'} />
 				<h2 className="sectionHeader">TV Series</h2>
 
@@ -43,7 +50,7 @@ const TvShows = () => {
 				) : (
 					<Search searchList={searchList} value={searchValue} />
 				)}
-			</main>
+			</motion.main>
 		</>
 	);
 };
