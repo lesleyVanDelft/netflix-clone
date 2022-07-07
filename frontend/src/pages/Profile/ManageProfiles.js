@@ -4,11 +4,11 @@ import BlankProfilePic from '../../assets/blank-profile-picture.png';
 import { FaPlusCircle } from 'react-icons/fa';
 import { TiPencil } from 'react-icons/ti';
 import { Link, useNavigate } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import ManageModal from './ManageModal';
 
 const ManageProfiles = () => {
-	// const [addActive, setAddActive] = useState(false);
 	const [editActive, setEditActive] = useState(false);
 	const [profileData, setProfileData] = useState();
 	const user = useSelector(state => state.user.user);
@@ -16,9 +16,14 @@ const ManageProfiles = () => {
 	const dispatch = useDispatch();
 	return (
 		<main className="ManageProfiles">
-			{editActive && (
-				<ManageModal setEditActive={setEditActive} profileData={profileData} />
-			)}
+			<AnimatePresence>
+				{editActive && (
+					<ManageModal
+						setEditActive={setEditActive}
+						profileData={profileData}
+					/>
+				)}
+			</AnimatePresence>
 			<h1>Manage Profiles:</h1>
 			<div className="ManageProfiles__users">
 				{user.profiles &&

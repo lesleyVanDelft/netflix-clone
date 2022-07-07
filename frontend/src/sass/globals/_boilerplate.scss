@@ -24,6 +24,7 @@ body {
 	margin-inline: auto;
 	color: color.$white;
 	font-weight: typo.$fontWeightLight;
+	overflow-x: hidden;
 
 	@media screen and (min-width: 1024px) {
 		overflow-y: scroll;
@@ -34,7 +35,7 @@ ul {
 }
 #root {
 	min-height: 100%;
-	overflow-x: hidden;
+	// overflow-x: hidden;
 	background-color: color.$darkBlue1;
 }
 
@@ -48,6 +49,13 @@ a:visited {
 	@media screen and(min-width: 1024px) {
 		display: flex;
 		position: relative;
+	}
+
+	.pageLogo {
+		z-index: 150;
+		position: absolute;
+		left: 3rem;
+		top: 3rem;
 	}
 }
 

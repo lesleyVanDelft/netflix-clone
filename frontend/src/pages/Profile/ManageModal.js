@@ -5,6 +5,8 @@ import { TiPencil } from 'react-icons/ti';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editProfile } from '../../features/userSlice/userSlice';
+import { modalVariant } from '../../framerVariants';
+import { motion } from 'framer-motion';
 
 const ManageModal = ({ setEditActive, profileData }) => {
 	const [username, setUsername] = useState(profileData.username);
@@ -33,7 +35,12 @@ const ManageModal = ({ setEditActive, profileData }) => {
 	};
 
 	return (
-		<div className="ManageModal">
+		<motion.div
+			className="ManageModal"
+			variants={modalVariant}
+			initial="initial"
+			animate="animate"
+			exit="exit">
 			<Logo className="ManageModal__logo" />
 			<h1>Edit profile</h1>
 			<div className="ManageModal__user">
@@ -70,7 +77,7 @@ const ManageModal = ({ setEditActive, profileData }) => {
 				</button>
 				<button className="delete">Delete profile</button>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

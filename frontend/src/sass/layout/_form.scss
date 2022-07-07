@@ -35,6 +35,7 @@
 		font-family: inherit;
 		font-weight: typo.$fontWeightLight;
 		font-size: 15px;
+		caret-color: color.$white2;
 
 		&::placeholder {
 			font-family: 'Outfit', sans-serif;
