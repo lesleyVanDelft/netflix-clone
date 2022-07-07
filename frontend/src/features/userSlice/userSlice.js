@@ -137,8 +137,14 @@ const userSlice = createSlice({
 			.addCase(editProfile.fulfilled, (state, action) => {
 				state.status = 'success';
 				action.payload = action.meta.arg;
-				// state.user.profiles = state.user.profiles.filter(prof => prof._id.toString === action.payload._id.toString())
-				// state.profiles = action.payload;
+				state.user.profiles = state.user.profiles.map(profile =>
+					profile._id === action.payload.profileId
+						? {
+								...profile,
+								username: action.payload.username,
+						  }
+						: { ...profile }
+				);
 			})
 			.addCase(editProfile.rejected, (state, action) => {
 				state.status = 'rejected';

@@ -1,13 +1,13 @@
 import { IoTriangle } from 'react-icons/io5';
 import { GoTriangleUp } from 'react-icons/go';
 import { motion } from 'framer-motion';
-import { dropdownVariant } from '../../framerVariants';
+import { dropdownVariant, dropdownVariantNav } from '../../framerVariants';
 
-const Dropdown = ({ children }) => {
+const Dropdown = ({ children, navbar }) => {
 	return (
 		<motion.ul
 			className="Dropdown"
-			variants={dropdownVariant}
+			variants={navbar ? dropdownVariantNav : dropdownVariant}
 			initial="initial"
 			animate="animate"
 			exit="exit">

@@ -50,7 +50,7 @@ const Navbar = () => {
 				ref={dropdownRef}>
 				<img src={navBlankProfile} alt="User avatar" className="userAvatar" />
 				{active && (
-					<Dropdown>
+					<Dropdown navbar={true}>
 						<DropdownItem>
 							<div className="flex-row-container">
 								<img

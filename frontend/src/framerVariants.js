@@ -46,6 +46,21 @@ export const dropdownVariant = {
 	},
 	exit: {
 		opacity: 0,
+		y: '15px',
+	},
+};
+
+export const dropdownVariantNav = {
+	initial: {
+		opacity: 0,
+		y: '-20px',
+	},
+	animate: {
+		opacity: 1,
+		y: '0px',
+	},
+	exit: {
+		opacity: 0,
 		// y: '0px',
 	},
 };
