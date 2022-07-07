@@ -9,7 +9,7 @@ import Recommended from './Recommended/Recommended';
 import Search from './Search/Search';
 import Trending from './Trending/Trending';
 import { pageVariant } from '../../framerVariants';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const Homepage = () => {
 	const loadStatus = useSelector(state => state.media.status);
@@ -44,7 +44,7 @@ const Homepage = () => {
 		}
 
 		setMediaList(media);
-	}, [dispatch, loadStatus, media, userStatus]);
+	}, [loadStatus, userStatus]);
 
 	useEffect(() => {
 		setSearchList(
@@ -59,28 +59,35 @@ const Homepage = () => {
 
 	return (
 		<>
-			{userStatus === 'success' && <Profile />}
-			{userStatus === 'loggedIn' && (
-				<>
-					<Navbar />
-					<motion.main
-						className="Homepage"
-						variants={pageVariant}
-						initial="initial"
-						animate="animate"
-						exit="exit">
-						<SearchBar getValue={getValue} placeholder="movies or TV series" />
-						{searchValue === '' ? (
-							<>
-								<Trending trendingList={trending} />
-								<Recommended mediaList={recommended} />
-							</>
-						) : (
-							<Search searchList={searchList} value={searchValue} />
-						)}
-					</motion.main>
-				</>
-			)}
+			<AnimatePresence>
+				{userStatus === 'success' && <Profile />}
+			</AnimatePresence>
+			<AnimatePresence>
+				{userStatus === 'loggedIn' && (
+					<>
+						<Navbar />
+						<motion.main
+							className="Homepage"
+							variants={pageVariant}
+							initial="initial"
+							animate="animate"
+							exit="exit">
+							<SearchBar
+								getValue={getValue}
+								placeholder="movies or TV series"
+							/>
+							{searchValue === '' ? (
+								<>
+									<Trending trendingList={trending} />
+									<Recommended mediaList={recommended} />
+								</>
+							) : (
+								<Search searchList={searchList} value={searchValue} />
+							)}
+						</motion.main>
+					</>
+				)}
+			</AnimatePresence>
 		</>
 	);
 };

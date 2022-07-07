@@ -209,7 +209,7 @@ const userSlice = createSlice({
 				state.error = 'something went wrong with logging out? :)';
 			})
 			.addCase(addBookmark.pending, (state, action) => {
-				state.status = 'pending';
+				state.status = 'loggedIn';
 			})
 			.addCase(addBookmark.fulfilled, (state, action) => {
 				state.status = 'loggedIn';
@@ -227,7 +227,7 @@ const userSlice = createSlice({
 				state.error = action.error.message;
 			})
 			.addCase(deleteBookmark.pending, (state, action) => {
-				state.status = 'pending';
+				state.status = 'loggedIn';
 			})
 			.addCase(deleteBookmark.fulfilled, (state, action) => {
 				state.status = 'loggedIn';
