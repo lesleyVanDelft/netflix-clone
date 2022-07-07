@@ -37,6 +37,12 @@ const persistConfig = {
 	storage,
 };
 
+// const rootReducer = (state, action) => {
+// 	if (action.type === 'user/logout') {
+// 		state = null;
+// 	}
+// };
+
 const reducer = combineReducers({
 	media: mediaReducer,
 	user: userReducer,

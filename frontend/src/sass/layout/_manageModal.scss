@@ -63,23 +63,38 @@
 			// margin-bottom: 2rem;
 			border-bottom: 1px solid darken($color: color.$lightGray, $amount: 30%);
 
-			input[type='text'] {
-				border: none;
-				font-family: inherit;
-				font-size: 17px;
-				padding: 0.5rem 1rem;
-				margin-right: 1rem;
-				width: 19rem;
-				background-color: color.$lightGray2;
-				color: color.$white;
-				font-weight: 300;
-				margin-bottom: 2rem;
+			.input-container {
+				position: relative;
+				input[type='text'] {
+					border: none;
+					font-family: inherit;
+					font-size: 17px;
+					padding: 0.5rem 1rem;
+					margin-right: 1rem;
+					width: 19rem;
+					background-color: color.$lightGray2;
+					color: color.$white;
+					font-weight: 300;
+					margin-bottom: 2rem;
+					border: 2px solid transparent;
 
-				&::placeholder {
-					color: inherit;
+					&::placeholder {
+						color: inherit;
+					}
+					&:focus {
+						outline: none;
+					}
+
+					&.success {
+						border: 2px solid rgb(119, 199, 0);
+					}
 				}
-				&:focus {
-					outline: none;
+
+				svg {
+					position: absolute;
+					right: -2rem;
+					font-size: 2.6rem;
+					color: rgb(119, 199, 0);
 				}
 			}
 

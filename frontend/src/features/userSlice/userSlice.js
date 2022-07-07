@@ -2,6 +2,7 @@ import { createSlice, createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { logoutLocalStorage } from '../utils/saveLocalStorage';
+import { toast } from 'react-toastify';
 
 // Gets jwt token from cookie and adds it to request header
 const setConfig = () => {
@@ -41,6 +42,22 @@ export const editProfile = createAsyncThunk('user/editProfile', async data => {
 	return response.data;
 });
 
+export const resetUpdateStatus = createAsyncThunk(
+	'user/reset',
+	async userStatus => {
+		// return console.log(getState().user)
+		return userStatus;
+	}
+);
+
+export const deleteProfile = createAsyncThunk(
+	'user/deleteProfile',
+	async data => {
+		const response = await axios.delete('/api/users/deleteProfile', data);
+		return response.data;
+	}
+);
+
 export const addBookmark = createAsyncThunk(
 	'user/addBookmark',
 	async postData => {
@@ -79,7 +96,9 @@ const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
-		logout: state => initialState,
+		reset: (state, action) => {
+			state.user.user.updateStatus = action.payload;
+		},
 	},
 	extraReducers: builder => {
 		builder
@@ -132,10 +151,10 @@ const userSlice = createSlice({
 				state.error = action.error.message;
 			})
 			.addCase(editProfile.pending, (state, action) => {
-				state.status = 'pending';
+				state.user.updateStatus = 'updatePending';
 			})
 			.addCase(editProfile.fulfilled, (state, action) => {
-				state.status = 'success';
+				state.user.updateStatus = 'updateSuccess';
 				action.payload = action.meta.arg;
 				state.user.profiles = state.user.profiles.map(profile =>
 					profile._id === action.payload.profileId
@@ -147,7 +166,16 @@ const userSlice = createSlice({
 				);
 			})
 			.addCase(editProfile.rejected, (state, action) => {
-				state.status = 'rejected';
+				state.user.updateStatus = 'updateRejected';
+				state.error = action.error.message;
+			})
+			.addCase(resetUpdateStatus.pending, (state, action) => {
+				state.user.updateStatus = null;
+			})
+			.addCase(resetUpdateStatus.fulfilled, (state, action) => {
+				state.user.updateStatus = null;
+			})
+			.addCase(resetUpdateStatus.rejected, (state, action) => {
 				state.error = action.error.message;
 			})
 			.addCase(logout.pending, (state, action) => {

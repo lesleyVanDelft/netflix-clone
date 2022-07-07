@@ -2,8 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import BlankProfilePic from '../../assets/blank-profile-picture.png';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { FaPlusCircle } from 'react-icons/fa';
-import { selectProfile } from '../../features/userSlice/userSlice';
-import { useState } from 'react';
+import {
+	resetUpdateStatus,
+	selectProfile,
+} from '../../features/userSlice/userSlice';
+import { useEffect, useState } from 'react';
 import Modal from '../../components/Modal/Modal';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,6 +17,11 @@ const Profile = () => {
 	const user = useSelector(state => state.user.user);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	// useEffect(() => {
+	// 	// updateStatus !== null && handleReset();
+	// 	// console.log(updateStatus);
+	// 	dispatch(resetUpdateStatus(user.updateStatus));
+	// }, []);
 	return (
 		<>
 			<AnimatePresence>

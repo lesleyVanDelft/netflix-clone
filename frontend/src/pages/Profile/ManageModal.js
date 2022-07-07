@@ -3,18 +3,25 @@ import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { GoTriangleDown } from 'react-icons/go';
 import { TiPencil } from 'react-icons/ti';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { editProfile } from '../../features/userSlice/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	editProfile,
+	resetUpdateStatus,
+} from '../../features/userSlice/userSlice';
 import { modalVariant } from '../../framerVariants';
 import { AnimatePresence, motion } from 'framer-motion';
 import Dropdown from '../../components/Dropdown/Dropdown';
 import DropdownItem from '../../components/Dropdown/DropdownItem/DropdownItem';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { BsCheck2 } from 'react-icons/bs';
+import { reset } from '../../features/userSlice/userSlice';
 
 const ManageModal = ({ setEditActive, profileData }) => {
 	const [username, setUsername] = useState(profileData.username);
 	const [editData, setEditData] = useState(profileData);
 	const [dropdownActive, setDropdownActive] = useState(false);
+	const updateStatus = useSelector(state => state.user.user.updateStatus);
+	const [updated, setUpdated] = useState(updateStatus);
 	const dropdownRef = useRef(null);
 	const dispatch = useDispatch();
 
@@ -23,6 +30,10 @@ const ManageModal = ({ setEditActive, profileData }) => {
 			setDropdownActive(false);
 		}
 	});
+
+	useEffect(() => {
+		setUpdated(updateStatus);
+	}, [updateStatus]);
 
 	useEffect(() => {
 		setEditData(profileData);
@@ -61,12 +72,16 @@ const ManageModal = ({ setEditActive, profileData }) => {
 				</div>
 
 				<div className="ManageModal__user--inputs">
-					<input
-						type="text"
-						value={username}
-						placeholder={username}
-						onChange={handleChange}
-					/>
+					<div className="input-container">
+						<input
+							type="text"
+							value={username}
+							placeholder={username}
+							onChange={handleChange}
+							className={`${updated === 'updateSuccess' ? 'success' : ''}`}
+						/>
+						{updated === 'updateSuccess' && <BsCheck2 />}
+					</div>
 
 					<div className="language" ref={dropdownRef}>
 						<span>Language:</span>
@@ -90,7 +105,10 @@ const ManageModal = ({ setEditActive, profileData }) => {
 				</button>
 				<button
 					className="cancel"
-					onClick={prevState => setEditActive(!prevState)}>
+					onClick={prevState => {
+						setEditActive(!prevState);
+						dispatch(resetUpdateStatus(updateStatus));
+					}}>
 					Cancel
 				</button>
 				<button className="delete">Delete profile</button>
