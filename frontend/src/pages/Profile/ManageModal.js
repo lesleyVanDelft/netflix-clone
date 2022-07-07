@@ -15,11 +15,13 @@ import DropdownItem from '../../components/Dropdown/DropdownItem/DropdownItem';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { BsCheck2 } from 'react-icons/bs';
 import { reset } from '../../features/userSlice/userSlice';
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 
 const ManageModal = ({ setEditActive, profileData }) => {
 	const [username, setUsername] = useState(profileData.username);
 	const [editData, setEditData] = useState(profileData);
 	const [dropdownActive, setDropdownActive] = useState(false);
+	const [deleteModal, setDeleteModal] = useState(false);
 	const updateStatus = useSelector(state => state.user.user.updateStatus);
 	const [updated, setUpdated] = useState(updateStatus);
 	const dropdownRef = useRef(null);
@@ -64,6 +66,15 @@ const ManageModal = ({ setEditActive, profileData }) => {
 			animate="animate"
 			exit="exit">
 			<Logo className="ManageModal__logo" />
+			<AnimatePresence>
+				{deleteModal && (
+					<ConfirmModal
+						image={BlankProfilePic}
+						setModalState={setDeleteModal}
+						profileData={editData}
+					/>
+				)}
+			</AnimatePresence>
 			<h1>Edit profile</h1>
 			<div className="ManageModal__user">
 				<div className="user-avatar-wrapper">
@@ -111,7 +122,9 @@ const ManageModal = ({ setEditActive, profileData }) => {
 					}}>
 					Cancel
 				</button>
-				<button className="delete">Delete profile</button>
+				<button className="delete" onClick={() => setDeleteModal(true)}>
+					Delete profile
+				</button>
 			</div>
 		</motion.div>
 	);

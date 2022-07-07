@@ -46,6 +46,7 @@ const Modal = ({ setAddActive, active }) => {
 					exists: false,
 					imageId: 'null',
 				},
+				bookmarks: [],
 			})
 		);
 		setNameValue('');

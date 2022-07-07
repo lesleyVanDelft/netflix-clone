@@ -36,6 +36,29 @@
 		letter-spacing: 0.3px;
 		line-height: 1.1;
 	}
+
+	&--squared {
+		border-radius: 0px;
+		background-color: transparent;
+		border: 1px solid color.$lightGray;
+		color: color.$lightGray;
+		padding: 0.7rem 0;
+		font-size: 1rem;
+		letter-spacing: 0.3px;
+		line-height: 1.1;
+		width: min(130px, 150px);
+		font-weight: bolder;
+		letter-spacing: 1px;
+
+		&.delete {
+			color: color.$black;
+			background-image: linear-gradient(30deg, white 50%, color.$red 50%);
+			background-repeat: no-repeat;
+			background-size: 31.25rem;
+			background-position: 0%;
+			transition: all 0.2s ease-in-out;
+		}
+	}
 }
 
 @media (hover: hover) {
@@ -45,6 +68,22 @@
 			&:hover {
 				border: 1px solid color.$white2;
 				color: color.$white2;
+			}
+		}
+
+		&--squared {
+			cursor: pointer;
+			&:hover {
+				border: 1px solid color.$white2;
+				color: color.$white2;
+			}
+
+			&.delete {
+				&:hover {
+					background-color: color.$red;
+					// color: color.$black;
+					background-position: 100%;
+				}
 			}
 		}
 	}

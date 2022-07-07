@@ -5,6 +5,7 @@ import { logoutLocalStorage } from '../utils/saveLocalStorage';
 import { toast } from 'react-toastify';
 
 // Gets jwt token from cookie and adds it to request header
+const tokenCookie = Cookies.get('jwt');
 const setConfig = () => {
 	const tokenCookie = Cookies.get('jwt');
 	return {
@@ -52,8 +53,11 @@ export const resetUpdateStatus = createAsyncThunk(
 
 export const deleteProfile = createAsyncThunk(
 	'user/deleteProfile',
-	async data => {
-		const response = await axios.delete('/api/users/deleteProfile', data);
+	async profileId => {
+		const response = await axios.delete('/api/users/deleteProfile', {
+			headers: { Authorization: `Bearer ${tokenCookie}` },
+			data: { profileId },
+		});
 		return response.data;
 	}
 );
@@ -164,6 +168,20 @@ const userSlice = createSlice({
 						  }
 						: { ...profile }
 				);
+			})
+			.addCase(deleteProfile.pending, (state, action) => {
+				state.user.updateStatus = 'deletePending';
+			})
+			.addCase(deleteProfile.fulfilled, (state, action) => {
+				state.user.updateStatus = 'deleteSuccess';
+				action.payload = action.meta.arg;
+				state.user.profiles = state.user.profiles.filter(profile => {
+					return profile._id.toString() !== action.payload.toString();
+				});
+			})
+			.addCase(deleteProfile.rejected, (state, action) => {
+				state.user.updateStatus = 'deleteRejected';
+				state.error = action.error.message;
 			})
 			.addCase(editProfile.rejected, (state, action) => {
 				state.user.updateStatus = 'updateRejected';

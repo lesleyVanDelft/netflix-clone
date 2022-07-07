@@ -13,6 +13,7 @@ import { logout } from '../../features/userSlice/userSlice';
 import { logoutLocalStorage } from '../../features/utils/saveLocalStorage';
 import { useDispatch } from 'react-redux';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
 	const [active, setActive] = useState(false);
@@ -49,34 +50,36 @@ const Navbar = () => {
 				onClick={() => setActive(!active)}
 				ref={dropdownRef}>
 				<img src={navBlankProfile} alt="User avatar" className="userAvatar" />
-				{active && (
-					<Dropdown navbar={true}>
-						<DropdownItem>
-							<div className="flex-row-container">
-								<img
-									src={navBlankProfile}
-									className="userAvatar profile"
-									alt="user profile icon"
-								/>
-								<button className="btn btn--dropdown">
-									<span className="bold">&#43;</span> Add Profile
+				<AnimatePresence>
+					{active && (
+						<Dropdown navbar={true}>
+							<DropdownItem>
+								<div className="flex-row-container">
+									<img
+										src={navBlankProfile}
+										className="userAvatar profile"
+										alt="user profile icon"
+									/>
+									<button className="btn btn--dropdown">
+										<span className="bold">&#43;</span> Add Profile
+									</button>
+								</div>
+							</DropdownItem>
+							<DropdownItem>
+								<button
+									className="btn btn--dropdown"
+									onClick={() => {
+										setTimeout(() => {
+											navigate('/login');
+											dispatch(logout());
+										}, 100);
+									}}>
+									Logout
 								</button>
-							</div>
-						</DropdownItem>
-						<DropdownItem>
-							<button
-								className="btn btn--dropdown"
-								onClick={() => {
-									setTimeout(() => {
-										navigate('/login');
-										dispatch(logout());
-									}, 100);
-								}}>
-								Logout
-							</button>
-						</DropdownItem>
-					</Dropdown>
-				)}
+							</DropdownItem>
+						</Dropdown>
+					)}
+				</AnimatePresence>
 			</div>
 		</nav>
 	);

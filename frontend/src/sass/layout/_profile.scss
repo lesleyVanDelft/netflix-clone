@@ -9,7 +9,6 @@
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	// overflow: hidden;
 	a {
 		color: inherit;
 		width: 100%;
@@ -17,7 +16,6 @@
 	}
 
 	h1 {
-		// font-size: min(3rem, 3.5vw);
 		font-size: 2.9375rem;
 		margin: 2.5rem 0;
 	}
@@ -26,7 +24,6 @@
 		display: flex;
 		align-items: center;
 		padding-bottom: 5rem;
-		// background-color: red;
 		.user {
 			display: flex;
 			flex-direction: column;
@@ -66,27 +63,12 @@
 				}
 			}
 		}
-
-		// &--create {
-		// 	width: 8.5625rem;
-		// 	height: 8.5625rem;
-		// 	background-color: orange;
-		// 	svg {
-		// 		font-size: 4rem;
-		// 	}
-		// }
 	}
 }
 
 .ManageProfiles {
 	&__users {
 		.user {
-			// position: relative;
-			// img {
-			// }
-			// .overlay {
-			// 	background-color: black;
-			// }
 			.avatar-wrapper {
 				position: relative;
 				width: 8.6875rem;
@@ -104,28 +86,12 @@
 				}
 				.editSvg {
 					position: absolute;
-					// background-color: black;
 					font-size: 2.5rem;
 					top: 50%;
 					transform: translate(-50%, -50%);
 					left: 50%;
 				}
 			}
-
-			// .overlay {
-			// 	position: absolute;
-			// 	background-color: color.$black;
-			// 	opacity: 0.5;
-			// 	height: 100%;
-			// 	width: 100%;
-			// 	display: flex;
-			// 	align-items: center;
-			// 	justify-content: center;
-
-			// 	svg {
-			// 		font-size: 2.5rem;
-			// 	}
-			// }
 		}
 	}
 }
@@ -137,7 +103,6 @@
 				&:hover {
 					cursor: pointer;
 					img {
-						// transform: scale(1.2);
 						border: 2px inset color.$red;
 					}
 					span {
@@ -167,7 +132,6 @@
 					&:hover {
 						cursor: pointer;
 						img {
-							// transform: scale(1.2);
 							border: 2px inset color.$red;
 						}
 						span {
@@ -190,21 +154,5 @@
 				}
 			}
 		}
-
-		// .Modal {
-		// 	&__add {
-		// 		&--inputs {
-		// 			.child-checkbox {
-		// 				.child-profile-tooltip {
-		// 					cursor: pointer;
-		// 					&:hover {
-		// 						z-index: 101;
-		// 						opacity: 1;
-		// 					}
-		// 				}
-		// 			}
-		// 		}
-		// 	}
-		// }
 	}
 }
