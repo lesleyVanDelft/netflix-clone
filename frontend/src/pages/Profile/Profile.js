@@ -11,6 +11,7 @@ import Modal from '../../components/Modal/Modal';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { pageVariant } from '../../framerVariants';
+import UserProfiles from './UserProfiles';
 
 const Profile = () => {
 	const [addActive, setAddActive] = useState(false);
@@ -36,37 +37,15 @@ const Profile = () => {
 				<Logo className="pageLogo" />
 				<h1>Who's watching?</h1>
 				<div className="Profile__users">
-					{user.profiles &&
-						user.profiles.map((prof, i) => {
-							return (
-								<div
-									className="user"
-									key={i}
-									onClick={() => dispatch(selectProfile(prof))}>
-									<img
-										src={
-											prof.profileImage.exists
-												? prof.profileImage.imageId
-												: BlankProfilePic
-										}
-										alt="user profile avatar"
-									/>
-									<span className="user__profileName">{prof.username}</span>
-								</div>
-							);
-						})}
-
-					{/* <div className="Profile__users--create"> */}
-					<div className="user add" onClick={() => setAddActive(true)}>
-						<div className="icon">
-							<FaPlusCircle />
-						</div>
-						<span className="user__profileName">Add profile</span>
-					</div>
+					<UserProfiles
+						user={user}
+						profiles={user !== null && user.profiles}
+						setAddActive={setAddActive}
+					/>
 				</div>
 
 				<button
-					className="btn btn--profilePage"
+					className="btn btn--squared"
 					onClick={() => navigate('/manageProfiles')}>
 					Manage profiles
 				</button>

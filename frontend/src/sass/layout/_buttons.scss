@@ -46,7 +46,10 @@
 		font-size: 1rem;
 		letter-spacing: 0.3px;
 		line-height: 1.1;
-		width: min(130px, 150px);
+		// width: min(130px, 150px);
+		// width: 150px;
+		width: clamp(8.125rem, 9.375rem, 10rem);
+		// line-break: none;
 		font-weight: bolder;
 		letter-spacing: 1px;
 

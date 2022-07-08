@@ -183,9 +183,13 @@
 		border-bottom: 1px solid darken($color: color.$lightGray, $amount: 20%);
 		margin-top: 1.5rem;
 		&--image {
+			// width: clamp(6.25rem, 7.5rem, 9.375rem);
+			// width: clamp(6.25rem, 7.5rem, 9.375rem);
 			img {
-				width: min(120px, 150px);
-				height: min(120px, 150px);
+				// width: min(120px, 150px);
+				// height: min(120px, 150px);
+				width: clamp(6.25rem, 7.5rem, 9.375rem);
+				width: clamp(6.25rem, 7.5rem, 9.375rem);
 				object-fit: cover;
 				border-radius: 5px;
 			}

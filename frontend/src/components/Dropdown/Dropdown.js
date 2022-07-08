@@ -6,15 +6,12 @@ import { dropdownVariant, dropdownVariantNav } from '../../framerVariants';
 const Dropdown = ({ children, navbar }) => {
 	return (
 		<motion.ul
-			className="Dropdown"
+			className={`Dropdown ${navbar ? 'nav' : ''}`}
 			variants={navbar ? dropdownVariantNav : dropdownVariant}
 			initial="initial"
 			animate="animate"
 			exit="exit">
-			<div className="Dropdown__container">
-				<GoTriangleUp />
-				{children}
-			</div>
+			<div className="Dropdown__container">{children}</div>
 		</motion.ul>
 	);
 };

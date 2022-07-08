@@ -28,21 +28,17 @@
 			content: '';
 			position: absolute;
 			bottom: 100%;
-			left: 10%;
+			right: 10%;
 			border: solid transparent;
 			height: 0;
 			width: 0;
 			pointer-events: none;
 			border-bottom-color: white;
 			border-width: 0.7rem;
-			// margin-left: -0.7rem;
-		}
-		svg {
-			color: inherit;
-			font-size: 2rem;
-			position: absolute;
-			right: 0.5rem;
-			top: -1.2rem;
+
+			@media screen and (min-width: 1024px) {
+				left: 10%;
+			}
 		}
 	}
 

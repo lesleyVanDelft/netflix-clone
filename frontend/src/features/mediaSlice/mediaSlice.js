@@ -1,4 +1,5 @@
 import { createSlice, createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { logout } from '../userSlice/userSlice';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 // import { logout, login } from '../userSlice/userSlice';
@@ -41,6 +42,16 @@ const mediaSlice = createSlice({
 			.addCase(getAll.rejected, (state, action) => {
 				state.status = 'failed';
 				state.error = action.error.message;
+			})
+			.addCase(logout.pending, (state, action) => {
+				state.status = 'pending';
+			})
+			.addCase(logout.fulfilled, (state, action) => {
+				state.media = [];
+				state.status = 'idle';
+			})
+			.addCase(logout.rejected, (state, action) => {
+				state.status = 'rejected';
 			});
 		// .addCase(login.fulfilled, (state, action) => {
 		// 	state.media = action.payload;

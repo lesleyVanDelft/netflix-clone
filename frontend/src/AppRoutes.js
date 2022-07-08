@@ -35,7 +35,11 @@ const AppRoutes = () => {
 				<Route path="/movies" element={<Movies />} />
 				<Route path="/television" element={<TvShows />} />
 				<Route path="/bookmarks" element={<Bookmarks />} />
-				<Route exact path="/" element={<Homepage />} />
+				<Route
+					exact
+					path="/"
+					element={userStatus === 'loggedIn' ? <Homepage /> : <Profile />}
+				/>
 				<Route path="/manageProfiles" element={<ManageProfiles />} />
 				<Route path="/test" element={<Profile />} />
 			</Routes>

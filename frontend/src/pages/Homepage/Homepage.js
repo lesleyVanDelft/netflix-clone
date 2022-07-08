@@ -19,6 +19,7 @@ const Homepage = () => {
 	const [mediaList, setMediaList] = useState(media);
 	const [searchList, setSearchList] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [loading, setLoading] = useState(loadStatus);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -32,19 +33,18 @@ const Homepage = () => {
 		}
 	}, [navigate, userStatus, userStorage]);
 
-	// useEffect(() => {
-	// 	if (loadStatus === 'success') {
-	// 		return <Profile />;
-	// 	}
-	// }, [loadStatus]);
-
 	useEffect(() => {
 		if (loadStatus === 'idle' && userStatus === 'loggedIn') {
 			dispatch(getAll());
 		}
 
 		setMediaList(media);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [loadStatus, userStatus]);
+
+	useEffect(() => {
+		setLoading(loadStatus);
+	}, [loadStatus]);
 
 	useEffect(() => {
 		setSearchList(
@@ -59,9 +59,9 @@ const Homepage = () => {
 
 	return (
 		<>
-			<AnimatePresence>
+			{/* <AnimatePresence>
 				{userStatus === 'success' && <Profile />}
-			</AnimatePresence>
+			</AnimatePresence> */}
 			<AnimatePresence>
 				{userStatus === 'loggedIn' && (
 					<>
