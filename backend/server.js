@@ -24,9 +24,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(morgan('tiny'));
 
-app.get('/', (req, res) => {
-	res.status(302).redirect('http://localhost:3000');
-});
+// app.get('/', (req, res) => {
+// 	res.status(302).redirect('http://localhost:3000');
+// });
 
 // Routes
 app.use('/api/users', authRoutes);
@@ -34,9 +34,13 @@ app.use('/api/media', mediaRoutes);
 app.use('/api/bookmarks', bookmarkRoutes);
 
 app.get('/login', (req, res) => {
-	res.status(301).redirect('http://localhost:3000/login');
-	// res.status(200).send('login page');
-	// res.status(301).redirect('https://feedback-lesley.herokuapp.com');
+	// res.status(301).redirect('http://localhost:3000/login');
+
+	res.status(301).redirect('https://ent-lesley.herokuapp.com');
+});
+
+app.get('/register', (req, res) => {
+	res.status(301).redirect('https://ent-lesley.herokuapp.com');
 });
 
 // Serve frontend

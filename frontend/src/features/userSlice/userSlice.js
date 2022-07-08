@@ -1,8 +1,7 @@
-import { createSlice, createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { logoutLocalStorage } from '../utils/saveLocalStorage';
-import { toast } from 'react-toastify';
 
 // Gets jwt token from cookie and adds it to request header
 const tokenCookie = Cookies.get('jwt');
@@ -14,11 +13,19 @@ const setConfig = () => {
 };
 
 export const register = createAsyncThunk('user/register', async userObject => {
-	const response = await axios.post('/api/users/register', userObject);
+	const response = await axios.post(
+		'/api/users/register',
+		userObject,
+		setConfig()
+	);
 	return response.data;
 });
 export const login = createAsyncThunk('user/login', async userObject => {
-	const response = await axios.post('/api/users/login', userObject);
+	const response = await axios.post(
+		'/api/users/login',
+		userObject,
+		setConfig()
+	);
 	return response.data;
 });
 
@@ -34,7 +41,7 @@ export const selectProfile = createAsyncThunk(
 );
 
 export const addProfile = createAsyncThunk('user/addProfile', async data => {
-	const response = await axios.post('/api/users/addProfile', data);
+	const response = await axios.post('/api/users/addProfile', data, setConfig());
 	return response.data;
 });
 
