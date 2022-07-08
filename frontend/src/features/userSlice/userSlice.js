@@ -14,11 +14,19 @@ const setConfig = () => {
 };
 
 export const register = createAsyncThunk('user/register', async userObject => {
-	const response = await axios.post('/api/users/register', userObject);
+	const response = await axios.post(
+		'/api/users/register',
+		userObject,
+		setConfig()
+	);
 	return response.data;
 });
 export const login = createAsyncThunk('user/login', async userObject => {
-	const response = await axios.post('/api/users/login', userObject);
+	const response = await axios.post(
+		'/api/users/login',
+		userObject,
+		setConfig()
+	);
 	return response.data;
 });
 
@@ -34,7 +42,7 @@ export const selectProfile = createAsyncThunk(
 );
 
 export const addProfile = createAsyncThunk('user/addProfile', async data => {
-	const response = await axios.post('/api/users/addProfile', data);
+	const response = await axios.post('/api/users/addProfile', data, setConfig());
 	return response.data;
 });
 
