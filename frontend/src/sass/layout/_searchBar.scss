@@ -4,23 +4,17 @@
 	width: 100%;
 	display: flex;
 	align-items: center;
-	// justify-content: space-between;
 	justify-content: flex-start;
-	// background-color: red;
 	padding: 0.5rem 0;
 	padding-left: 1rem;
 	position: relative;
-	// &::after {
-	// 	content: '';
-	// 	display: block;
-	// 	width: 0;
-	// 	height: 1px;
-	// 	background-color: color.$white;
-	// 	transition: width 0.3s;
-	// }
+
 	&__input {
 		width: 80%;
 		position: relative;
+
+		&:focus {
+		}
 		// &::before {
 		// 	content: '';
 		// 	display: block;
@@ -37,14 +31,16 @@
 			font-size: 1rem;
 			font-weight: typo.$fontWeightLight;
 			border: none;
+
 			border-bottom: 1px solid transparent;
 			padding: 15px 0;
 			color: color.$white;
-			transition: all 0.3s ease-in-out;
+			transition: all 0.25s ease-in-out;
 			position: relative;
 
 			&:focus {
 				outline: none;
+				border-bottom: 1px solid color.$white2;
 			}
 
 			&.active {

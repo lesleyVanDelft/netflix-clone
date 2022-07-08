@@ -10,6 +10,7 @@ import Search from './Search/Search';
 import Trending from './Trending/Trending';
 import { pageVariant } from '../../framerVariants';
 import { AnimatePresence, motion } from 'framer-motion';
+import SkeletonCard from '../../components/Skeleton/SkeletonCard';
 
 const Homepage = () => {
 	const loadStatus = useSelector(state => state.media.status);
@@ -59,35 +60,32 @@ const Homepage = () => {
 
 	return (
 		<>
-			{/* <AnimatePresence>
-				{userStatus === 'success' && <Profile />}
-			</AnimatePresence> */}
-			<AnimatePresence>
-				{userStatus === 'loggedIn' && (
-					<>
-						<Navbar />
-						<motion.main
-							className="Homepage"
-							variants={pageVariant}
-							initial="initial"
-							animate="animate"
-							exit="exit">
-							<SearchBar
-								getValue={getValue}
-								placeholder="movies or TV series"
-							/>
-							{searchValue === '' ? (
-								<>
-									<Trending trendingList={trending} />
-									<Recommended mediaList={recommended} />
-								</>
-							) : (
-								<Search searchList={searchList} value={searchValue} />
-							)}
-						</motion.main>
-					</>
-				)}
-			</AnimatePresence>
+			{/* <AnimatePresence> */}
+			<Navbar />
+			{/* {loading === 'loading' && (
+				<SkeletonCard height={180} list={trending} width={120} />
+			)} */}
+			{userStatus === 'loggedIn' && (
+				<>
+					<motion.main
+						className="Homepage"
+						variants={pageVariant}
+						initial="initial"
+						animate="animate"
+						exit="exit">
+						<SearchBar getValue={getValue} placeholder="movies or TV series" />
+						{searchValue === '' ? (
+							<>
+								<Trending trendingList={trending} />
+								<Recommended mediaList={recommended} />
+							</>
+						) : (
+							<Search searchList={searchList} value={searchValue} />
+						)}
+					</motion.main>
+				</>
+			)}
+			{/* </AnimatePresence> */}
 		</>
 	);
 };

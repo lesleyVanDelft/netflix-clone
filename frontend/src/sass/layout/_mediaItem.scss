@@ -44,10 +44,6 @@
 			transition: 0.1s all ease-in-out;
 		}
 
-		&:hover {
-			opacity: 0.5;
-		}
-
 		svg {
 			transform: scale(1.2) rotate(1deg);
 		}
@@ -125,6 +121,17 @@
 			padding-top: 0.2rem;
 			@media screen and (min-width: 1024px) {
 				font-size: 1.5rem;
+			}
+		}
+	}
+}
+
+@media (hover: hover) {
+	.MediaItem,
+	.MediaItem.recommended {
+		button {
+			&:hover {
+				opacity: 0.5;
 			}
 		}
 	}

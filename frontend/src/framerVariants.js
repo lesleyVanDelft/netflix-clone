@@ -67,3 +67,15 @@ export const dropdownVariantNav = {
 		y: '-5px',
 	},
 };
+
+// export const inputVariant = {
+// 	initial:{
+// 		border:
+// 	},
+// 	animate:{
+
+// 	},
+// 	exit:{
+
+// 	},
+// }

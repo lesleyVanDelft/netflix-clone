@@ -9,6 +9,7 @@ import {
 import { useMediaQuery } from 'react-responsive';
 import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
+import { motion } from 'framer-motion';
 
 const MediaItem = ({ content, trending }) => {
 	const user = useSelector(state => state.user);
@@ -53,7 +54,8 @@ const MediaItem = ({ content, trending }) => {
 
 	return (
 		<li className={`MediaItem ${trending ? 'trending' : 'recommended'} `}>
-			<button
+			<motion.button
+				whileTap={{ scale: 1.1 }}
 				type="button"
 				onClick={() => {
 					if (bookmark) {
@@ -66,7 +68,7 @@ const MediaItem = ({ content, trending }) => {
 				}}
 				className={`MediaItem__bookmark ${bookmark ? 'bookmarked' : ''}`}>
 				<BookmarkIconEmpty />
-			</button>
+			</motion.button>
 
 			<figure>
 				{isDesktop || (
@@ -93,14 +95,14 @@ const MediaItem = ({ content, trending }) => {
 					{trending && (
 						<div className="MediaItem__details trending">
 							<ul className="details">
-								<li>{content.year || <Skeleton />}</li>
+								<li>{content.year}</li>
 								<span className="circle"></span>
 								<li>
 									<MovieIcon />
-									{content.category || <Skeleton />}
+									{content.category}
 								</li>
 								<span className="circle"></span>
-								<li>{content.rating || <Skeleton />}</li>
+								<li>{content.rating}</li>
 							</ul>
 
 							<h3>{content.title}</h3>
@@ -110,17 +112,17 @@ const MediaItem = ({ content, trending }) => {
 					{trending || (
 						<div className="MediaItem__details recommended">
 							<ul className="details recommended">
-								<li>{content.year || <Skeleton />}</li>
+								<li>{content.year}</li>
 								<span className="circle"></span>
 								<li>
 									<MovieIcon />
-									{content.category || <Skeleton />}
+									{content.category}
 								</li>
 								<span className="circle"></span>
-								<li>{content.rating || <Skeleton />}</li>
+								<li>{content.rating}</li>
 							</ul>
 
-							<h3>{content.title || <Skeleton />}</h3>
+							<h3>{content.title}</h3>
 						</div>
 					)}
 				</figcaption>

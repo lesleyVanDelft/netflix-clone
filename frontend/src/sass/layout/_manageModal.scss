@@ -43,16 +43,10 @@
 
 		.user-avatar-wrapper {
 			position: relative;
-			// max-width: 110px;
-			// max-height: 110px;
-			// width: min(6.25rem, 8.125rem);
 			width: clamp(5.625rem, 7.6vw, 7rem);
 			height: clamp(5.625rem, 7.6vw, 7rem);
-			// height: min(6.25rem, 8.125rem);
 			margin-right: 1rem;
-			// border-radius: 5px;
 			img {
-				// max-width: 110px;
 				width: 100%;
 				height: 100%;
 				object-fit: contain;

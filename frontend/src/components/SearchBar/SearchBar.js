@@ -1,6 +1,7 @@
 import { useEffect, useState, createContext } from 'react';
 import searchIcon from '../../assets/icon-search.svg';
 import { AiFillCloseCircle } from 'react-icons/ai';
+// import {motion} from 'framer-motion'
 
 const SearchBar = ({ getValue, placeholder }) => {
 	const [value, setValue] = useState('');
@@ -21,7 +22,7 @@ const SearchBar = ({ getValue, placeholder }) => {
 					type="text"
 					name="search"
 					id="search"
-					className={`searchInput `}
+					className={`searchInput`}
 					placeholder={`Search for ${placeholder}`}
 					autoComplete="off"
 					value={value}

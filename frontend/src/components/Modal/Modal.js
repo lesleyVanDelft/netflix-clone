@@ -64,7 +64,7 @@ const Modal = ({ setAddActive, active }) => {
 				<div className="Modal__content">
 					<div className="Modal__text">
 						<h1>Add profile</h1>
-						<h2>Add a new profile for another "TotallyNotNetflix" user.</h2>
+						<h2>Add a new profile for another user.</h2>
 					</div>
 
 					<div className="Modal__add">
