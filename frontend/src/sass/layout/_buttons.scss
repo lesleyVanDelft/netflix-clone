@@ -27,7 +27,8 @@
 	&--profilePage {
 		border-radius: 0px;
 		// width: 15%;
-		width: min(12%, 15%);
+		// width: min(12%, 15%);
+		width: clamp(8.125rem, 20vw, 10.9375rem);
 		background-color: transparent;
 		border: 1px solid color.$lightGray;
 		color: color.$lightGray;
@@ -48,10 +49,11 @@
 		line-height: 1.1;
 		// width: min(130px, 150px);
 		// width: 150px;
-		width: clamp(8.125rem, 9.375rem, 10rem);
+		width: clamp(10.125rem, 20vw, 12rem);
 		// line-break: none;
 		font-weight: bolder;
 		letter-spacing: 1px;
+		white-space: nowrap;
 
 		&.delete {
 			color: color.$black;
