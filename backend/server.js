@@ -35,7 +35,7 @@ app.use('/api/bookmarks', bookmarkRoutes);
 
 app.get('/login', (req, res) => {
 	// res.status(301).redirect('http://localhost:3000/login');
-	// res.status(200).send('login page');
+
 	res.status(301).redirect('https://ent-lesley.herokuapp.com');
 });
 
