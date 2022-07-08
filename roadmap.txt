@@ -1,3 +1,0 @@
-url entered -> login success -> profile selection -> set selected profile -> load homepage with profile bookmarks
-
-click on profile -> set profile redux -> set redux bookmarks to selected profile bookmarks -> load homepage

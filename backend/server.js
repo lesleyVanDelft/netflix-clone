@@ -39,6 +39,10 @@ app.get('/login', (req, res) => {
 	res.status(301).redirect('https://ent-lesley.herokuapp.com');
 });
 
+app.get('/register', (req, res) => {
+	res.status(301).redirect('https://ent-lesley.herokuapp.com');
+});
+
 // Serve frontend
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../frontend/build')));
