@@ -24,6 +24,7 @@ const ConfirmModal = ({ image, setModalState, profileData }) => {
 			animate="animate"
 			exit="exit">
 			<h1>Are you sure?</h1>
+			<h2>Deleting profile named: '{profileData && profileData.username}'</h2>
 			<div className="ConfirmModal__content">
 				<figure className="ConfirmModal__content--image">
 					<img src={image} alt="user avatar" />

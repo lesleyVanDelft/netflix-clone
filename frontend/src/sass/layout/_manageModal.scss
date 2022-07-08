@@ -12,6 +12,13 @@
 	justify-content: center;
 	flex-direction: column;
 
+	@media screen and (max-width: 1024px) {
+		max-width: 100%;
+		h1 {
+			white-space: nowrap;
+		}
+	}
+
 	&__logo {
 		position: absolute;
 		left: 3rem;
@@ -19,21 +26,31 @@
 	}
 	h1 {
 		margin: 0;
-		font-size: 4vw;
+		// font-size: 4vw;
+		font-size: clamp(2.5rem, 4vw, 4rem);
 	}
 
 	&__user {
 		display: flex;
-		padding: 1.3rem 0;
+		padding: 1.3rem 1rem;
 		margin: 1rem 0 2rem 0;
-
 		border-top: 1px solid darken($color: color.$lightGray, $amount: 30%);
+
+		@media screen and (max-width: 1024px) {
+			padding: 2rem 0;
+			border-bottom: 1px solid darken($color: color.$lightGray, $amount: 30%);
+		}
 
 		.user-avatar-wrapper {
 			position: relative;
-			max-width: 110px;
-			max-height: 110px;
+			// max-width: 110px;
+			// max-height: 110px;
+			// width: min(6.25rem, 8.125rem);
+			width: clamp(5.625rem, 7.6vw, 7rem);
+			height: clamp(5.625rem, 7.6vw, 7rem);
+			// height: min(6.25rem, 8.125rem);
 			margin-right: 1rem;
+			// border-radius: 5px;
 			img {
 				// max-width: 110px;
 				width: 100%;
@@ -52,6 +69,7 @@
 				cursor: pointer;
 				padding: 0.2rem;
 				box-shadow: 0px 0px 3px 2px lighten($color: color.$black, $amount: 10%);
+				opacity: 0.7;
 			}
 		}
 
@@ -62,6 +80,9 @@
 			flex-direction: column;
 			// margin-bottom: 2rem;
 			border-bottom: 1px solid darken($color: color.$lightGray, $amount: 30%);
+			@media screen and (max-width: 1024px) {
+				border-bottom: none;
+			}
 
 			.input-container {
 				position: relative;
@@ -70,13 +91,20 @@
 					font-family: inherit;
 					font-size: 17px;
 					padding: 0.5rem 1rem;
-					margin-right: 1rem;
-					width: 19rem;
+					margin-right: 0rem;
+					width: fit-content;
+					width: clamp(13.125rem, 62vw, 16.25rem);
 					background-color: color.$lightGray2;
 					color: color.$white;
 					font-weight: 300;
 					margin-bottom: 2rem;
 					border: 2px solid transparent;
+
+					@media screen and (max-width: 1024px) {
+						// margin-right: 1rem;
+						// width: 19rem;
+						margin-bottom: 1rem;
+					}
 
 					&::placeholder {
 						color: inherit;
@@ -95,6 +123,15 @@
 					right: -2rem;
 					font-size: 2.6rem;
 					color: rgb(119, 199, 0);
+
+					@media screen and(max-width: 1024px) {
+						right: 0.5rem;
+						// top: 50%;
+						bottom: 50%;
+						font-size: 1.5rem;
+						// top: 50%;
+						transform: translateY(25%);
+					}
 				}
 			}
 
@@ -104,6 +141,9 @@
 				justify-content: flex-start;
 				margin-bottom: 1rem;
 				position: relative;
+				@media screen and (max-width: 1024px) {
+					margin-bottom: 0;
+				}
 				span {
 					padding-bottom: 0.5rem;
 					opacity: 0.85;
@@ -129,9 +169,20 @@
 	}
 
 	&__buttons {
+		display: flex;
+		flex-direction: column;
+		width: 70%;
+		padding-top: 1rem;
+
+		@media screen and (min-width: 1024px) {
+			flex-direction: row;
+			width: 40%;
+			padding-top: 0rem;
+		}
 		button {
 			border: none;
-			margin-right: 1rem;
+			margin-right: 0rem;
+			margin-bottom: 1.5rem;
 			background-color: transparent;
 			border: 1px solid color.$white2;
 			color: color.$white2;
@@ -140,24 +191,42 @@
 			letter-spacing: 1px;
 			padding: 0.5rem 1.5rem;
 			cursor: pointer;
+			white-space: nowrap;
+			width: 100%;
 			&:last-of-type {
-				margin: 0;
+				margin-bottom: 0;
+			}
+			@media screen and (min-width: 1024px) {
+				margin-right: 1rem;
+				margin-bottom: 0;
+				&:last-of-type {
+					margin: 0;
+				}
 			}
 		}
 
 		.save {
+			background-color: color.$white2;
 			color: color.$black;
-			background-image: linear-gradient(30deg, white 50%, color.$red 50%);
-			background-repeat: no-repeat;
-			background-size: 31.25rem;
-			background-position: 0%;
-			transition: all 0.3s ease-in-out;
+			// border: 1px solid color.$red;
+			@media screen and (min-width: 1024px) {
+				color: color.$black;
+				background-image: linear-gradient(30deg, white 50%, color.$red 50%);
+				background-repeat: no-repeat;
+				background-size: 31.25rem;
+				background-position: 0%;
+				transition: all 0.3s ease-in-out;
+			}
 		}
 
 		.cancel,
 		.delete {
 			opacity: 0.8;
 			transition: all 0.1s ease-in-out;
+		}
+
+		.delete {
+			border: 1px solid color.$red;
 		}
 	}
 }
