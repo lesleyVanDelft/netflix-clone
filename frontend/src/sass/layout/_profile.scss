@@ -79,6 +79,10 @@
 				position: relative;
 				width: 8.6875rem;
 				height: 8.6875rem;
+				@media screen and (max-width: 1024px) {
+					width: 8.9rem;
+					height: 8.9rem;
+				}
 				&::before {
 					content: '';
 					position: absolute;
