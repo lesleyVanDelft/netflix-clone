@@ -7,6 +7,7 @@ const {
 } = require('../controllers/profileController');
 const { registerUser, loginUser } = require('../controllers/userAuth');
 
+const app = express();
 const router = express.Router();
 
 app.use(function (req, res, next) {

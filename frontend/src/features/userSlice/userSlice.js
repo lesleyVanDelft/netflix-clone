@@ -1,8 +1,7 @@
-import { createSlice, createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { logoutLocalStorage } from '../utils/saveLocalStorage';
-import { toast } from 'react-toastify';
 
 // Gets jwt token from cookie and adds it to request header
 const tokenCookie = Cookies.get('jwt');

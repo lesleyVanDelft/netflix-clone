@@ -1,6 +1,7 @@
 const express = require('express');
 const { setBookmark, deleteBookmark } = require('../controllers/bookmarkMedia');
 
+const app = express();
 const router = express.Router();
 app.use(function (req, res, next) {
 	res.header(
